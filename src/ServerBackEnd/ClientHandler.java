@@ -9,6 +9,11 @@ import java.net.Socket;
 import NetWorkProtocol.NetworkProtocol;
 import MysqlQueries.SqlQueries;
 
+
+/*
+    CURRENT ASSUMPTION: the client thread cannot read and write at the same time
+    THe server only writes to the user when it receives a request from the user
+*/
 public class ClientHandler extends Thread {
     
     MainServer mainServer;
@@ -76,9 +81,9 @@ public class ClientHandler extends Thread {
     }
     
     public void executeCommand(String command){
+        System.out.println("COMPLETE THE FUCKING EXECUTE COMMAND BITCH");
         //this method will include all the sql queries and accessing files
     }
-
 
     public void closeEveryThing() throws IOException{
             if(dataInputStream != null){
