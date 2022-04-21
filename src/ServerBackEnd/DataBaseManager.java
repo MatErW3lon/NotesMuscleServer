@@ -18,12 +18,12 @@ public class DataBaseManager {
        
         Statement statement = connection.createStatement();
         //ResultSet resultset = statement.executeQuery(SqlQueries.getAllUsers);
-        resultSet = statement.executeQuery(SqlQueries.createLoginUserQuery("MatErW3lon", "uglyay@14"));
+        /*resultSet = statement.executeQuery(SqlQueries.createLoginUserQuery("MatErW3lon", "uglyay@14"));
         if(resultSet.next()){
             System.out.println(resultSet.getString("BilkentID"));
         }else{
             System.out.println("ERROR");
-        }
+        }*/
         
         //while(resultset.next()){
         //    System.out.println(resultset.getString("UserName"));
