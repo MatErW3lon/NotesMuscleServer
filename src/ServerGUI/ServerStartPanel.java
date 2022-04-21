@@ -29,7 +29,7 @@ public class ServerStartPanel extends JPanel{
         clientInfoTextArea.setBackground(Color.black);
         clientInfoTextArea.setFont(MainFrame.GLOBAL_FONT);
         clientInfoTextArea.setForeground(Color.white);
-        clientInfoTextArea.append("HELLO");
+        clientInfoTextArea.append("<PLACEHOLDER FOR FIRST CLIENT>");
 
         closeServerBtn = new JButton("CLOSE THE SERVER");
         closeServerBtn.setFont(MainFrame.GLOBAL_FONT);

@@ -20,7 +20,7 @@ public class DataBaseManager {
         ResultSet resultset = statement.executeQuery(SqlQueries.getAllUsers);
 
         while(resultset.next()){
-            System.out.println(resultset.getString("first_name"));
+            System.out.println(resultset.getString("UserName"));
         }
     
     }
