@@ -6,8 +6,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import java.io.File;
+
 
 public class MainServer extends Thread{
+
+    public static final File backendExFile;
+    static{
+        backendExFile = new File(System.getProperty("user.dir") + "\\assets\\BackEndExceptions.txt");
+    }
 
     ServerSocket serverSocket;
     ArrayList<ClientHandler> clients;
@@ -52,6 +59,18 @@ public class MainServer extends Thread{
 
     public void removeSpecificClient(ClientHandler clientHandler){
         clients.remove(clientHandler);
+    }
+
+    //this method has to synched because multiple clients will try to execute sql queries
+    public synchronized String runSqlQuery(String query){
+        String query_result;
+        try{
+            query_result = dataBaseManager.runSqlQuery(query);
+            return query_result;
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+            return "ERROR";
+        }
     }
 
     public void closeEveryThing() throws IOException{
