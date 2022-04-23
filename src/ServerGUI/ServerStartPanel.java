@@ -12,7 +12,7 @@ import java.awt.Color;
 
 public class ServerStartPanel extends JPanel{
     
-    //private class atttributes
+    //private class attributes
     JTextArea clientInfoTextArea;
     JButton closeServerBtn;
     JLabel clientInfoLabel;
@@ -32,6 +32,7 @@ public class ServerStartPanel extends JPanel{
         clientInfoTextArea.append("<PLACEHOLDER FOR FIRST CLIENT>");
 
         closeServerBtn = new JButton("CLOSE THE SERVER");
+        closeServerBtn.setFocusable(false);
         closeServerBtn.setFont(MainFrame.GLOBAL_FONT);
         closeServerBtn.setBackground(Color.gray);
         closeServerBtn.setForeground(Color.black);

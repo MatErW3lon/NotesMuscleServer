@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-import MysqlQueries.SqlQueries;
-
 public class DataBaseManager {
     
     Connection connection;
@@ -14,9 +12,9 @@ public class DataBaseManager {
     ResultSet resultSet;
 
     public DataBaseManager() throws Exception{
-        Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/notesmuscle", "root", "uglyday@14"); 
+        connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/notesmuscle", "root", "uglyday@14"); 
        
-        Statement statement = connection.createStatement();
+        statement = connection.createStatement();
         //ResultSet resultset = statement.executeQuery(SqlQueries.getAllUsers);
         /*resultSet = statement.executeQuery(SqlQueries.createLoginUserQuery("MatErW3lon", "uglyay@14"));
         if(resultSet.next()){

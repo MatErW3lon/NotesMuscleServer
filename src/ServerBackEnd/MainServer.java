@@ -12,6 +12,7 @@ import java.io.File;
 public class MainServer extends Thread{
 
     public static final File backendExFile;
+    
     static{
         backendExFile = new File(System.getProperty("user.dir") + "\\assets\\BackEndExceptions.txt");
     }
@@ -24,8 +25,9 @@ public class MainServer extends Thread{
 
     public MainServer() throws Exception{
         serverSocket  = new ServerSocket(4444);
-        clients = new ArrayList<>();
         dataBaseManager = new DataBaseManager();
+        
+        clients = new ArrayList<>(); 
     }
 
     public void run(){
@@ -37,18 +39,18 @@ public class MainServer extends Thread{
                     serverSocket = new ServerSocket(4444);
                 }
                 Socket clientSocket = serverSocket.accept(); //wait for a new client a blocking method 
+                System.out.println("NEW CLIENT CONNECTED");
                 //if the server is closed on the blocked accept() the SocketException will be thrown which is normal
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
                 clientHandler.start();
                 clients.add(clientHandler);
-                
             }catch(IOException IOex){
+                IOex.printStackTrace();
                 try {
                     closeEveryThing();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                IOex.printStackTrace();
             }
         }
     }

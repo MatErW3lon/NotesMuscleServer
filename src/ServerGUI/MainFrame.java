@@ -83,7 +83,7 @@ public class MainFrame extends JFrame{
         startServerBtn.setBackground(Color.gray);
         startServerBtn.setForeground(Color.black);
         startServerBtn.setFont(new Font("Mistral", Font.PLAIN, 20));
-
+        startServerBtn.setFocusable(false);
         startServerBtn.setSize(50, 100);
         startServerBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -108,6 +108,7 @@ public class MainFrame extends JFrame{
                 }
             }
         });
+
         mainFramePanel.setLayout(new BorderLayout());
         mainFramePanel.add(serverSetupLabel, BorderLayout.NORTH);
         mainFramePanel.add(serverLogoLabel, BorderLayout.CENTER);
