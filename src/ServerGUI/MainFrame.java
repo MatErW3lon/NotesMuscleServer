@@ -56,8 +56,7 @@ public class MainFrame extends JFrame{
         setMainFrame();
         createComponenets();
         contentPane.add("mainFramePanel", this.mainFramePanel);
-
-        serverStartPanel = new ServerStartPanel(this);
+        this.serverStartPanel = new ServerStartPanel(this);
         contentPane.add("serverStartPanel", this.serverStartPanel);
     }
 
@@ -90,6 +89,7 @@ public class MainFrame extends JFrame{
                 if(mainServer == null){
                     try{
                         mainServer = new MainServer();
+                        serverStartPanel = new ServerStartPanel(MainFrame.mainFrame);
                         JOptionPane.showMessageDialog(null, "SERVER STARTED AT PORT localhost:4444", "SERVER START", JOptionPane.INFORMATION_MESSAGE);
                         mainServer.start();
                         crd.next(contentPane);
@@ -131,7 +131,7 @@ public class MainFrame extends JFrame{
     public void closeServer(){
         mainServer.setServerState(false);
         try{
-            mainServer.closeEveryThing();mainServer.closeEveryThing();
+            mainServer.closeEveryThing();
         }catch(IOException IOex){
             IOex.printStackTrace();
         }
