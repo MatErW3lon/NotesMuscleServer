@@ -1,5 +1,7 @@
 package ServerGUI;
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,7 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class ServerStartPanel extends JPanel{
+import ServerBackEnd.BackendGUI_Interface;
+
+public class ServerStartPanel extends JPanel implements Runnable{
     
     //private class attributes
     JTextArea clientInfoTextArea;
@@ -18,9 +22,13 @@ public class ServerStartPanel extends JPanel{
     JLabel clientInfoLabel;
     final int WIDHT = 400;
     final int HEIGHT = 600;
+    Thread updateClientTextAreaThread;
+    boolean exit;
+    MainFrame mainFrame;
     //____________________________________
 
     public ServerStartPanel(MainFrame mainFrame){
+        this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
         setSize(WIDTH, HEIGHT);
         setBackground(Color.black);
@@ -29,7 +37,7 @@ public class ServerStartPanel extends JPanel{
         clientInfoTextArea.setBackground(Color.black);
         clientInfoTextArea.setFont(MainFrame.GLOBAL_FONT);
         clientInfoTextArea.setForeground(Color.white);
-        clientInfoTextArea.append("<PLACEHOLDER FOR FIRST CLIENT>");
+        clientInfoTextArea.append("CLIENT USERNAMES");
 
         closeServerBtn = new JButton("CLOSE THE SERVER");
         closeServerBtn.setFocusable(false);
@@ -38,6 +46,7 @@ public class ServerStartPanel extends JPanel{
         closeServerBtn.setForeground(Color.black);
         closeServerBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                serverPanelDestructor();
                 mainFrame.closeServer();
             }
         });
@@ -50,6 +59,34 @@ public class ServerStartPanel extends JPanel{
         add(clientInfoLabel, BorderLayout.NORTH);
         add(clientInfoTextArea, BorderLayout.CENTER);
         add(closeServerBtn, BorderLayout.SOUTH);
+
+        exit = false;
+        updateClientTextAreaThread = new Thread(this);
+        updateClientTextAreaThread.start();
     }
+
+    @Override
+    public void run() {
+        //only update if the change is detected
+        //what is the possible change. the change in the size of the client_info arraylist!
+        ArrayList<String> clients_info = BackendGUI_Interface.ClientInformationHandler(null, true, false);
+        while(!exit){
+            ArrayList<String> temp = BackendGUI_Interface.ClientInformationHandler(null, true, false);
+            if(clients_info.size() != temp.size()){
+                clients_info = temp;
+                clientInfoTextArea.setText(null);
+                clientInfoTextArea.append("CLIENT USERNAMES");
+                for(String client_username : clients_info){
+                    clientInfoTextArea.append('\n' + client_username);
+                }
+            }    
+        }
+    }
+
+    private void serverPanelDestructor(){
+        exit = true;
+    }
+    
+    
 
 }
