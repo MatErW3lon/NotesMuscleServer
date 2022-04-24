@@ -1,7 +1,11 @@
 package NetWorkProtocol;
 
 public interface NetworkProtocol {
-    String splitCharacter = "/";
+    String LOGIN_FAILED = "ERROR";
+
+    String connectionEstablished = "CONNECTED";
+
+    String dataDelimiter = "/";
 
     String User_LogOut = "LOGOUT";
     String Invalid_LogOut = null;
