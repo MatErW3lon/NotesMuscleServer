@@ -1,0 +1,3 @@
+ServerBackEnd.InvalidFirstCommand: THE FIRST COMMAND WAS NOT LOGIN FROM USER /139.179.197.249
+	at ServerBackEnd.ClientHandler.loginErrorOccured(ClientHandler.java:105)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:68)
