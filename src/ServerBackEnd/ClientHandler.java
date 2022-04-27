@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 
-
+import ServerBackEnd.RequestExecution.RequestExecution;
 import NetWorkProtocol.NetworkProtocol;
 import MysqlQueries.SqlQueries;
 
@@ -22,7 +22,7 @@ public class ClientHandler extends Thread {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
     RequestExecution requestExecution;
-
+    String command;
     String username;
 
     public ClientHandler(Socket clientSocket, MainServer mainServer) throws IOException{
