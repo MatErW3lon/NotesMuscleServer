@@ -11,6 +11,6 @@ abstract class Command_Executor {
         this.myClientHandler = myClientHandler;
     }
 
-    public abstract void executeCommand(String incomingData);
+    public abstract boolean executeCommand(String[] incomingData) throws Exception;
 
 }
