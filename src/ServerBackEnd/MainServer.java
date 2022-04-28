@@ -12,19 +12,32 @@ import java.io.File;
 public class MainServer extends Thread{
 
     public static final File backendExFile;
+    static MainServer mainServer;
     
     static{
         backendExFile = new File(System.getProperty("user.dir") + "\\assets\\BackEndExceptions.txt");
+        mainServer = null;
     }
 
     ServerSocket serverSocket;
     ArrayList<ClientHandler> clients;
     DataBaseManager dataBaseManager;
-
     private boolean keepServerRunning = true;
 
-    public MainServer() throws Exception{
+    public static MainServer getInstance() throws Exception{
+        if(mainServer == null){
+            MainServer.mainServer = new MainServer();
+        }
+        return MainServer.mainServer;
+    }
+
+    public static void resetInstance() {
+        MainServer.mainServer = null;
+    }
+
+    private MainServer() throws Exception{
         serverSocket  = new ServerSocket(4444);
+
         dataBaseManager = new DataBaseManager();
         
         clients = new ArrayList<>(); 
@@ -67,7 +80,7 @@ public class MainServer extends Thread{
     public synchronized String runSqlQuery(String query){
         String query_result;
         try{
-            query_result = dataBaseManager.runSqlQuery(query);
+            query_result = MainServer.getInstance().dataBaseManager.runSqlQuery(query);
             return query_result;
         }catch(Exception e){
             e.printStackTrace(System.err);
@@ -85,4 +98,6 @@ public class MainServer extends Thread{
             }
             dataBaseManager = null;
     }
+
+    
 }

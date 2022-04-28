@@ -88,7 +88,7 @@ public class MainFrame extends JFrame{
             public void actionPerformed(ActionEvent e){
                 if(mainServer == null){
                     try{
-                        mainServer = new MainServer();
+                        mainServer = MainServer.getInstance();
                         serverStartPanel = new ServerStartPanel(MainFrame.mainFrame);
                         JOptionPane.showMessageDialog(null, "SERVER STARTED AT PORT localhost:4444", "SERVER START", JOptionPane.INFORMATION_MESSAGE);
                         mainServer.start();
@@ -136,6 +136,7 @@ public class MainFrame extends JFrame{
             IOex.printStackTrace();
         }
         mainServer = null;
+        MainServer.resetInstance();
         crd.previous(contentPane);
     }
 }

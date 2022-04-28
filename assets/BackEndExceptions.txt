@@ -1,3 +1,5 @@
-ServerBackEnd.InvalidFirstCommand: THE FIRST COMMAND WAS NOT LOGIN FROM USER /139.179.197.150
-	at ServerBackEnd.ClientHandler.loginErrorOccured(ClientHandler.java:105)
-	at ServerBackEnd.ClientHandler.run(ClientHandler.java:68)
+NotesMuscles.util.InvalidFirstCommand: THE FIRST COMMAND WAS NOT LOGIN FROM USER /139.179.197.150
+	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:32)
+	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:32)
+	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:64)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:47)
