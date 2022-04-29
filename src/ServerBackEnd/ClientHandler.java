@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import NotesMuscles.util.*;
+import NotesMuscles.io.*;
 import ServerBackEnd.RequestExecution.RequestExecution;
 import NetWorkProtocol.NetworkProtocol;
 
@@ -39,16 +39,19 @@ public class ClientHandler extends Thread {
     public void run(){
         //we keep listening on a different thread
         try{
+            //System.out.println(Thread.currentThread());
             dataOutputStream.writeUTF(NetworkProtocol.connectionEstablished);
             dataOutputStream.flush();
             String client_command = dataInputStream.readUTF();
 
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
+                System.out.println("READY FOR ANOTHER COMMAND");
                 client_command = dataInputStream.readUTF();
             } 
+
         }catch(Exception exception){
-            if(exception instanceof InvalidFirstCommand){
+            if(exception instanceof InvalidFirstCommand || exception instanceof InvalidCommandException){
                 try{
                     exception.printStackTrace(new PrintStream(MainServer.backendExFile));
                 }catch(FileNotFoundException fileNotFoundException){

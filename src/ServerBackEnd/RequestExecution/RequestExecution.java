@@ -5,6 +5,7 @@ import java.util.Map;
 
 import ServerBackEnd.*;
 import NetWorkProtocol.NetworkProtocol;
+import NotesMuscles.io.*;
 
 public class RequestExecution {
    
@@ -23,10 +24,17 @@ public class RequestExecution {
 
         //init LogOut_Executor;
         command_executors.put(NetworkProtocol.User_LogOut, new LogOut_Executor(myClientHandler));
+
+        //init Imaga_Executor;
+        command_executors.put(NetworkProtocol.Image_Send, new Image_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{
         String[] data = incomingData.split(NetworkProtocol.dataDelimiter);
+        System.out.println(data[0]);
+        if(!command_executors.containsKey(data[0])){
+            throw new InvalidCommandException(data[0], myClientHandler.getSocket().getInetAddress().toString()); 
+        }
         Command_Executor command_Executor = command_executors.get(data[0]);
         return command_Executor.executeCommand(data);
     }

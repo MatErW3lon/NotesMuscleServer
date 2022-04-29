@@ -1,4 +1,4 @@
-package NotesMuscles.util;
+package NotesMuscles.io;
 
 public class InvalidFirstCommand extends Exception{
     public InvalidFirstCommand(String fromIPAdr){

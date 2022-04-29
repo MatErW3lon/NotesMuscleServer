@@ -14,4 +14,8 @@ public interface NetworkProtocol {
     //example command to log in a user LOGIN/MatErW3lon/uglyday@14
 
     String SuccessFull_LOGIN = "SUCCESS";
+
+    String Image_Send = "IMAGE";
+    String Image_Stop = "STOPIMAGE";
+    int Image_Received_Confirmation = 1;
 }
