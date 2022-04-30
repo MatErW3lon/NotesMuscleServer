@@ -5,6 +5,7 @@ import ServerBackEnd.BackendGUI_Interface;
 import ServerBackEnd.MainServer;
 import NetWorkProtocol.NetworkProtocol;
 import MysqlQueries.SqlQueries;
+import MysqlQueries.SqlQueryType;
 import NotesMuscles.io.*;
 
 class Login_Executor extends Command_Executor{
@@ -17,10 +18,9 @@ class Login_Executor extends Command_Executor{
     public boolean executeCommand(String[] incomingData) throws Exception{
         //System.out.println("THREAD IN LOGIN: " + Thread.currentThread());
         if(incomingData[0].equals(NetworkProtocol.User_LogIn)){
-            String sqlResult = MainServer.getInstance().runSqlQuery(SqlQueries.createLoginUserQuery(incomingData[1], incomingData[2]));
-            if(!sqlResult.equals(NetworkProtocol.LOGIN_FAILED)){    
+            String sqlResult = (String) MainServer.getInstance().runSqlQuery(SqlQueries.createLoginUserQuery(incomingData[1], incomingData[2]), SqlQueryType.LOGIN_QUERY );
+            if(!(sqlResult == null)){    
                 myClientHandler.setUserName(incomingData[1]);
-                BackendGUI_Interface.ClientInformationHandler(incomingData[1], false, false);
                 Thread.sleep(10);
                 myClientHandler.getOutStream().writeUTF(NetworkProtocol.SuccessFull_LOGIN);
                 return true;
@@ -29,7 +29,6 @@ class Login_Executor extends Command_Executor{
                 myClientHandler.getOutStream().flush();
                 String clientIP = myClientHandler.getSocket().getInetAddress().toString();
                 myClientHandler.closeEveryThing();
-                System.out.println("INVALID LOGIN EXCEPTION THROWN");
                 throw new InvalidFirstCommand(clientIP);
             }
         }else{

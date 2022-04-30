@@ -2,20 +2,25 @@ package ServerBackEnd;
 
 import java.util.ArrayList;
 
+import ServerBackEnd.DataBaseManager.DataBaseManager;
+
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import java.io.File;
 
+import NotesMuscles.io.*;
 
 public class MainServer extends Thread{
 
-    public static final File backendExFile;
+    public static final File requestExceptionFile;
+    private static final File queryExceptionFile;
     static MainServer mainServer;
     
     static{
-        backendExFile = new File(System.getProperty("user.dir") + "\\assets\\BackEndExceptions.txt");
+        requestExceptionFile = new File(System.getProperty("user.dir") + "\\assets\\RequestExceptions.txt");
+        queryExceptionFile = new File(System.getProperty("user.dir") + "\\assets\\QueryExceptions.txt");
         mainServer = null;
     }
 
@@ -52,7 +57,7 @@ public class MainServer extends Thread{
                     serverSocket = new ServerSocket(4444);
                 }
                 Socket clientSocket = serverSocket.accept(); //wait for a new client a blocking method 
-                System.out.println("NEW CLIENT CONNECTED");
+                //System.out.println("NEW CLIENT CONNECTED");
                 //if the server is closed on the blocked accept() the SocketException will be thrown which is normal
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
                 clientHandler.start();
@@ -76,15 +81,23 @@ public class MainServer extends Thread{
         clients.remove(clientHandler);
     }
 
-    //this method has to synched because multiple clients will try to execute sql queries
-    public synchronized String runSqlQuery(String query){
-        String query_result;
+    //this method has to be synched because multiple clients will try to execute sql queries
+    public synchronized Object runSqlQuery(String query, Integer queryType){
+        Object query_result = null;
         try{
-            query_result = MainServer.getInstance().dataBaseManager.runSqlQuery(query);
+            query_result = MainServer.getInstance().dataBaseManager.SqlQuery(query, queryType);
             return query_result;
         }catch(Exception e){
-            e.printStackTrace(System.err);
-            return "ERROR";
+            if(e instanceof LoginQueryFailedException){
+                try {
+                    e.printStackTrace(new PrintStream(queryExceptionFile));
+                } catch (IOException e1) {
+                    e1.printStackTrace(System.err);
+                }
+            }else{
+                e.printStackTrace(System.err);
+            }
+            return query_result;
         }
     }
 

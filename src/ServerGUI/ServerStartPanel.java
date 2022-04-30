@@ -69,9 +69,9 @@ public class ServerStartPanel extends JPanel implements Runnable{
     public void run() {
         //only update if the change is detected
         //what is the possible change. the change in the size of the client_info arraylist!
-        ArrayList<String> clients_info = BackendGUI_Interface.ClientInformationHandler(null, true, false);
-        while(!exit){
-            ArrayList<String> temp = BackendGUI_Interface.ClientInformationHandler(null, true, false);
+        ArrayList<String> clients_info = BackendGUI_Interface.ClientInformationHandler(null, true);
+        while(!exitServerPanel(false)){
+            ArrayList<String> temp = BackendGUI_Interface.ClientInformationHandler(null, true);
             if(clients_info.size() != temp.size()){
                 clients_info = temp;
                 clientInfoTextArea.setText(null);
@@ -83,10 +83,14 @@ public class ServerStartPanel extends JPanel implements Runnable{
         }
     }
 
-    private void serverPanelDestructor(){
-        exit = true;
+    private synchronized boolean exitServerPanel(boolean endPanel){
+        if(endPanel)
+            exit = endPanel;
+        return exit;  
     }
-    
-    
 
+    private void serverPanelDestructor(){
+        exitServerPanel(true);
+        BackendGUI_Interface.resetClientInformation();
+    }
 }

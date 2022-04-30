@@ -27,11 +27,13 @@ public class RequestExecution {
 
         //init Imaga_Executor;
         command_executors.put(NetworkProtocol.Image_Send, new Image_Executor(myClientHandler));
+
+        //init ImageStop_Executor;
+        command_executors.put(NetworkProtocol.Image_Stop, new ImageStop_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{
         String[] data = incomingData.split(NetworkProtocol.dataDelimiter);
-        System.out.println(data[0]);
         if(!command_executors.containsKey(data[0])){
             throw new InvalidCommandException(data[0], myClientHandler.getSocket().getInetAddress().toString()); 
         }

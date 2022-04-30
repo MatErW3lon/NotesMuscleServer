@@ -46,19 +46,25 @@ public class ClientHandler extends Thread {
 
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
-                System.out.println("READY FOR ANOTHER COMMAND");
+                String GUIBuilder = username + " REQUESTED " + client_command.split(NetworkProtocol.dataDelimiter)[0];
+                BackendGUI_Interface.ClientInformationHandler(GUIBuilder, false);
                 client_command = dataInputStream.readUTF();
             } 
 
         }catch(Exception exception){
             if(exception instanceof InvalidFirstCommand || exception instanceof InvalidCommandException){
                 try{
-                    exception.printStackTrace(new PrintStream(MainServer.backendExFile));
+                    exception.printStackTrace(new PrintStream(MainServer.requestExceptionFile));
                 }catch(FileNotFoundException fileNotFoundException){
                     fileNotFoundException.printStackTrace(System.err);
                 }
             }else{
                 exception.printStackTrace(System.err);
+            }
+            try {
+                closeEveryThing();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }       
     }

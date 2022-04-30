@@ -13,15 +13,16 @@ public class BackendGUI_Interface {
         Client_Information = new ArrayList<>();
     }
 
-    public static synchronized ArrayList<String> ClientInformationHandler(String tempString, boolean setTextArea, boolean removeUser){
+    public static synchronized ArrayList<String> ClientInformationHandler(String tempString, boolean setTextArea){
         if(setTextArea){
-            return new ArrayList<String>(Client_Information);
-        }else if(removeUser){
-            Client_Information.remove(tempString);
             return new ArrayList<String>(Client_Information);
         }else{
             Client_Information.add(tempString);
             return null;
         }
+    }
+
+    public static void resetClientInformation(){
+        Client_Information = new ArrayList<>();
     }
 }
