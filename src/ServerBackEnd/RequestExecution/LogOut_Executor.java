@@ -16,7 +16,8 @@ class LogOut_Executor extends Command_Executor{
     public boolean executeCommand(String[] incomingData) throws Exception{
         myClientHandler.getOutStream().writeUTF(NetworkProtocol.User_LogOut);
         myClientHandler.getOutStream().flush();
-        BackendGUI_Interface.ClientInformationHandler(myClientHandler.getUserName(), false, true);
+        BackendGUI_Interface.ClientInformationHandler(myClientHandler.getUserName() + " REQUESTED " + "LOGOUT", false);
+        BackendGUI_Interface.ClientInformationHandler(myClientHandler.getUserName(), false);
         Thread.sleep(10);
         myClientHandler.closeEveryThing();
         return false;

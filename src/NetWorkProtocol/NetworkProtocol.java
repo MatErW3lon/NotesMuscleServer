@@ -3,8 +3,6 @@ package NetWorkProtocol;
 public interface NetworkProtocol {
     String LOGIN_FAILED = "ERROR";
 
-    String connectionEstablished = "CONNECTED";
-
     String dataDelimiter = "/";
 
     String User_LogOut = "LOGOUT";
@@ -17,5 +15,9 @@ public interface NetworkProtocol {
 
     String Image_Send = "IMAGE";
     String Image_Stop = "STOPIMAGE";
-    int Image_Received_Confirmation = 1;
+    Integer Image_Received_Confirmation = 1;
+
+    String Create_Account_Request = "CREATEACCOUNT";
+    String ACCOUNT_EXISTS_ERROR = "-1";
+    String ACCOUNT_CONTINUE = "1";
 }

@@ -30,6 +30,9 @@ public class RequestExecution {
 
         //init ImageStop_Executor;
         command_executors.put(NetworkProtocol.Image_Stop, new ImageStop_Executor(myClientHandler));
+
+        //init CreateAccount_Executor;
+        command_executors.put(NetworkProtocol.Create_Account_Request, new Create_Account_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{

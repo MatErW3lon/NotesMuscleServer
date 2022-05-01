@@ -21,12 +21,15 @@ public class DataBaseManager {
         connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/notesmuscle", "root", "uglyday@14"); 
         statement = connection.createStatement();
         query_map = new HashMap<>();
-       initializeQueryMap(); 
+        initializeQueryMap(); 
     }
 
     private void initializeQueryMap() {
         //init Login Query
         query_map.put(SqlQueryType.LOGIN_QUERY, new LoginQuery(statement));
+
+        //init Bilkent ID uniqueness query
+        query_map.put(SqlQueryType.BILKENTID_UNIQUENESS_QUERY, new CheckBilkentIDUniquenessQuery(statement));
     }
 
     public Object SqlQuery(String query, Integer type) throws Exception{

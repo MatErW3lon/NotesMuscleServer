@@ -40,10 +40,9 @@ public class ClientHandler extends Thread {
         //we keep listening on a different thread
         try{
             //System.out.println(Thread.currentThread());
-            dataOutputStream.writeUTF(NetworkProtocol.connectionEstablished);
-            dataOutputStream.flush();
+        
             String client_command = dataInputStream.readUTF();
-
+            System.out.println(client_command);
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
                 String GUIBuilder = username + " REQUESTED " + client_command.split(NetworkProtocol.dataDelimiter)[0];
