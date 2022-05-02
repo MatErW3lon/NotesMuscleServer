@@ -1,11 +1,11 @@
-package ServerBackEnd.DataBaseManager;
+package ServerBackEnd.DataBaseManager.Query;
 
 import java.sql.Statement;
 import java.sql.ResultSet;
 
 import NotesMuscles.io.LoginQueryFailedException;
 
-class LoginQuery extends RunSqlQuery{
+public class LoginQuery extends RunSqlQuery{
 
     public LoginQuery(Statement statement){
         super(statement);

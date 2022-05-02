@@ -1,8 +1,8 @@
-package ServerBackEnd.DataBaseManager;
+package ServerBackEnd.DataBaseManager.Query;
 
 import java.sql.Statement;
 
-abstract class RunSqlQuery {
+public abstract class RunSqlQuery {
 
     protected Statement statement;
 

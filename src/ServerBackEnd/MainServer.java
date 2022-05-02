@@ -101,6 +101,14 @@ public class MainServer extends Thread{
         }
     }
 
+    public synchronized void runSqlUpdate(String update, Integer updateType){
+        try{
+            MainServer.getInstance().dataBaseManager.SqlUpdate(update, updateType);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+
     public void closeEveryThing() throws IOException{
         //need to close all client sockets also
             for(ClientHandler client : clients){

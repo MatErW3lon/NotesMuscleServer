@@ -8,8 +8,7 @@ public interface NetworkProtocol {
     String User_LogOut = "LOGOUT";
     String Invalid_LogOut = null;
 
-    String User_LogIn = "LOGIN"; //note that this will be extend by username and password 
-    //example command to log in a user LOGIN/MatErW3lon/uglyday@14
+    String User_LogIn = "LOGIN";
 
     String SuccessFull_LOGIN = "SUCCESS";
 
@@ -20,4 +19,6 @@ public interface NetworkProtocol {
     String Create_Account_Request = "CREATEACCOUNT";
     String ACCOUNT_EXISTS_ERROR = "-1";
     String ACCOUNT_CONTINUE = "1";
+    String Cancel_Acc_Request = "CANCEL_NEW_ACC";
+    String Acc_Info_Ready = "READY_TO_CREATE";
 }

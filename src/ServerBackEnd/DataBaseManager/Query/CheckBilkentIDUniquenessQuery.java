@@ -1,10 +1,10 @@
-package ServerBackEnd.DataBaseManager;
+package ServerBackEnd.DataBaseManager.Query;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
 import NetWorkProtocol.NetworkProtocol;
 
-class CheckBilkentIDUniquenessQuery extends RunSqlQuery{
+public class CheckBilkentIDUniquenessQuery extends RunSqlQuery{
 
     public CheckBilkentIDUniquenessQuery(Statement statement){
         super(statement);

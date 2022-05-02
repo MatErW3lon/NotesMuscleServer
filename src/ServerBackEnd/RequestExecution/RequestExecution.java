@@ -33,6 +33,12 @@ public class RequestExecution {
 
         //init CreateAccount_Executor;
         command_executors.put(NetworkProtocol.Create_Account_Request, new Create_Account_Executor(myClientHandler));
+
+        //init Cancel Executor;
+        command_executors.put(NetworkProtocol.Cancel_Acc_Request, new Cancel_Acc_Creation_Executor(myClientHandler));
+
+        //init FinalizeAccout_Executor;
+        command_executors.put(NetworkProtocol.Acc_Info_Ready, new Finalize_Acc_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{
