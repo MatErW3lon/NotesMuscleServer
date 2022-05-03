@@ -9,7 +9,7 @@ import MysqlQueries.Sql_Interaction;
 import ServerBackEnd.DataBaseManager.Query.CheckBilkentIDUniquenessQuery;
 import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
-import ServerBackEnd.DataBaseManager.Update.NewAccountQuery;
+import ServerBackEnd.DataBaseManager.Update.NewAccountUpdate;
 import ServerBackEnd.DataBaseManager.Update.RunSqlUpdate;
 
 import java.util.Map;
@@ -42,7 +42,7 @@ public class DataBaseManager {
     }
 
     private void initUpdateMap(){
-        update_map.put(Sql_Interaction.CREATE_NEW_ACCOUNT, new NewAccountQuery(statement));
+        update_map.put(Sql_Interaction.CREATE_NEW_ACCOUNT, new NewAccountUpdate(statement));
     }
 
     public Object SqlQuery(String query, Integer type) throws Exception{

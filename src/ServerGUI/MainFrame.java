@@ -41,6 +41,7 @@ public class MainFrame extends JFrame{
     private static MainFrame mainFrame = null;
 
     public static void main(String[] args) {
+        System.out.println(System.getProperty("user.dir"));
         //System.out.println("THREAD: " + Thread.currentThread());
         MainFrame mainFrame = MainFrame.getInstance();
         mainFrame.setVisible(true);

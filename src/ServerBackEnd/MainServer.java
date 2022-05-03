@@ -9,24 +9,29 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import NotesMuscles.io.*;
+import NotesMuscles.util.DirectoryManager;
 
 public class MainServer extends Thread{
 
     public static final File requestExceptionFile;
     private static final File queryExceptionFile;
+    private static final File dirManagerFile;
     static MainServer mainServer;
     
     static{
-        requestExceptionFile = new File(System.getProperty("user.dir") + "\\assets\\RequestExceptions.txt");
-        queryExceptionFile = new File(System.getProperty("user.dir") + "\\assets\\QueryExceptions.txt");
+        requestExceptionFile = new File(System.getProperty("user.dir") + "\\assets\\RequestExStream.txt");
+        queryExceptionFile = new File(System.getProperty("user.dir") + "\\assets\\SqlStream.txt");
+        dirManagerFile = new File(System.getProperty("user.dir") + "\\assets\\DirectoryManagerStream.txt");
         mainServer = null;
     }
 
     ServerSocket serverSocket;
     ArrayList<ClientHandler> clients;
     DataBaseManager dataBaseManager;
+    DirectoryManager directoryManager;
     private boolean keepServerRunning = true;
 
     public static MainServer getInstance() throws Exception{
@@ -41,6 +46,7 @@ public class MainServer extends Thread{
     }
 
     private MainServer() throws Exception{
+        directoryManager = new DirectoryManager();
         serverSocket  = new ServerSocket(4444);
 
         dataBaseManager = new DataBaseManager();
@@ -108,7 +114,23 @@ public class MainServer extends Thread{
             e.printStackTrace(System.err);
         }
     }
-
+    
+    public synchronized void createNewDir(String[] clientInfo){
+        try{
+            MainServer.getInstance().directoryManager.createClientDirOnNewAccount(clientInfo);
+        }catch(Exception e){
+            if(e instanceof DirCreationException){
+                try {
+                    e.printStackTrace(new PrintStream(dirManagerFile));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace(System.err);
+                }
+            }else{
+                e.printStackTrace(System.err);
+            }
+        }
+    }
+    
     public void closeEveryThing() throws IOException{
         //need to close all client sockets also
             for(ClientHandler client : clients){

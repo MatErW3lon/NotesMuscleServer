@@ -51,7 +51,7 @@ public class ClientHandler extends Thread {
             } 
 
         }catch(Exception exception){
-            if(exception instanceof InvalidFirstCommand || exception instanceof InvalidCommandException){
+            if(exception instanceof InvalidFirstCommand || exception instanceof InvalidCommandException || exception instanceof AccountCreationException){
                 try{
                     exception.printStackTrace(new PrintStream(MainServer.requestExceptionFile));
                 }catch(FileNotFoundException fileNotFoundException){

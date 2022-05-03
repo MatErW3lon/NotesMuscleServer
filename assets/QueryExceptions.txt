@@ -1,8 +1,0 @@
-NotesMuscles.io.LoginQueryFailedException: THE LOGIN QUERY select BilkentID from login_info where UserName = 'USERNAME' and PassWord = 'PASSWORD' FAILED
-	at ServerBackEnd.DataBaseManager.LoginQuery.runSqlQuery(LoginQuery.java:25)
-	at ServerBackEnd.DataBaseManager.DataBaseManager.SqlQuery(DataBaseManager.java:34)
-	at ServerBackEnd.MainServer.runSqlQuery(MainServer.java:91)
-	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:21)
-	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:42)
-	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:72)
-	at ServerBackEnd.ClientHandler.run(ClientHandler.java:48)

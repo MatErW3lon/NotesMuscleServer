@@ -1,6 +1,6 @@
 package ServerBackEnd.DataBaseManager.Update;
 
-import java.lang.Thread.State;
+
 import java.sql.Statement;
 
 public abstract class RunSqlUpdate {

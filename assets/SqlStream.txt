@@ -1,0 +1,8 @@
+NotesMuscles.io.AccountCreationException: THE UPDATE REQUEST INSERT INTO `notesmuscle`.`courses`(`CoursesID`,`Course1`,`Course2`,`Course3`,`Course4`,`Course5`)VALUES (22101138,'CS-102-02','math-132-01','Lng-171-01','eng-102-02','math-102-01'); COULD NOT BE PROCESSED
+	at ServerBackEnd.DataBaseManager.Update.NewAccountUpdate.runSqlUpdate(NewAccountUpdate.java:17)
+	at ServerBackEnd.DataBaseManager.DataBaseManager.SqlUpdate(DataBaseManager.java:55)
+	at ServerBackEnd.MainServer.runSqlUpdate(MainServer.java:107)
+	at ServerBackEnd.RequestExecution.Finalize_Acc_Executor.executeCommand(Finalize_Acc_Executor.java:25)
+	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:50)
+	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:72)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:47)

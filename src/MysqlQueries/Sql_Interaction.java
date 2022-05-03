@@ -28,12 +28,15 @@ public interface Sql_Interaction extends Sql_Interaction_Type{
         String[] userData = newUserData.split(NetworkProtocol.dataDelimiter);
         String updateBuilder = "INSERT INTO `notesmuscle`.`login_info`" +
                                 "(`BilkentID`,`Username`,`Password`,`UserID`)" +
-                                "VALUES (" + userData[2] + ",'" + userData[9] +"','" + userData[10] + "'," + userData[2] + ");";
+                                "VALUES (" + userData[2] + ",'" + userData[8] +"','" + userData[9] + "'," + userData[2] + ");";
         return updateBuilder;
     }
 
     static String createNewCoursesRecordUpdate(String newUserData){
         String[] userData = newUserData.split(NetworkProtocol.dataDelimiter);
-
+        String updateBuilder = "INSERT INTO `notesmuscle`.`courses`" +
+                                "(`CoursesID`,`Course1`,`Course2`,`Course3`,`Course4`,`Course5`)" +
+                                "VALUES (" + userData[2] + ",'" + userData[3] + "','" + userData[4] + "','" + userData[5] + "','" + userData[6] + "','" + userData[7] + "');";
+        return updateBuilder;
     }
 }
