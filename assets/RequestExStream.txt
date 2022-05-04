@@ -1,0 +1,5 @@
+NotesMuscles.io.InvalidFirstCommand: THE FIRST COMMAND WAS NOT LOGIN FROM USER /139.179.197.150
+	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:30)
+	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:50)
+	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:72)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:47)

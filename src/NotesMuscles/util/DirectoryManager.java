@@ -29,15 +29,10 @@ public class DirectoryManager {
     private void createCoursesSubDir(String path, String[] clientInfo) throws DirCreationException{
         File courseSubDir;
         for(int i = 1; i < clientInfo.length; i++){
-            if(clientInfo[i].equalsIgnoreCase("NONE")){
-                continue;
-            }
             courseSubDir = new File(path + "//" + clientInfo[i]);
             if (!courseSubDir.mkdir()) {
                 throw new DirCreationException(clientInfo[0]);
             }   
-            
         }
     }
-
 }

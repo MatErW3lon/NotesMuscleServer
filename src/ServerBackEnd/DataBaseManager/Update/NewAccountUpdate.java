@@ -2,8 +2,6 @@ package ServerBackEnd.DataBaseManager.Update;
 
 import java.sql.Statement;
 
-import NetWorkProtocol.NetworkProtocol;
-import NotesMuscles.io.AccountCreationException;
 
 public class NewAccountUpdate extends RunSqlUpdate{
     
@@ -17,13 +15,4 @@ public class NewAccountUpdate extends RunSqlUpdate{
         
     }
 
-    private int countDataDelimiter(String update){
-        int count = 0;
-        for(int i = 0; i < update.length(); i++){
-            if(update.charAt(i) ==NetworkProtocol.dataDelimiter.charAt(0)){
-                count++;
-            }
-        }
-        return count;
-    }
 }
