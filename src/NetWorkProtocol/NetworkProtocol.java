@@ -21,4 +21,6 @@ public interface NetworkProtocol {
     String ACCOUNT_CONTINUE = "1";
     String Cancel_Acc_Request = "CANCEL_NEW_ACC";
     String Acc_Info_Ready = "READY_TO_CREATE";
+
+    String RETRIEVE_TIMETABLE_REQUEST = "TIMETABLE";
 }

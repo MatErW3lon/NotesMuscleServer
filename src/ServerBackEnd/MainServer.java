@@ -90,7 +90,7 @@ public class MainServer extends Thread{
         clients.remove(clientHandler);
     }
 
-    public Sql_Interaction getSqlInterator(){
+    public synchronized Sql_Interaction getSqlInteration(){
         return this.sql_Interaction;
     }
 

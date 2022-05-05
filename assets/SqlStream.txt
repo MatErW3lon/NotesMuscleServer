@@ -1,8 +1,8 @@
-NotesMuscles.io.LoginQueryFailedException: THE LOGIN QUERY select BilkentID from login_info where Username = 'MatErW3lon' and Password = 'uglyday@14' FAILED
+NotesMuscles.io.LoginQueryFailedException: THE LOGIN QUERY select BilkentID from login_info where Username = 'Mat3' and Password = 'uglyday@14' FAILED
 	at ServerBackEnd.DataBaseManager.Query.LoginQuery.runSqlQuery(LoginQuery.java:25)
-	at ServerBackEnd.DataBaseManager.DataBaseManager.SqlQuery(DataBaseManager.java:50)
-	at ServerBackEnd.MainServer.runSqlQuery(MainServer.java:94)
-	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:19)
-	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:50)
+	at ServerBackEnd.DataBaseManager.DataBaseManager.SqlQuery(DataBaseManager.java:58)
+	at ServerBackEnd.MainServer.runSqlQuery(MainServer.java:101)
+	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:20)
+	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:53)
 	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:72)
-	at ServerBackEnd.ClientHandler.run(ClientHandler.java:47)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:46)

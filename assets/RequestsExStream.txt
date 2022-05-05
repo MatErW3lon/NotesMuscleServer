@@ -1,4 +1,0 @@
-NotesMuscles.io.InvalidCommandException: THE NETWORK ENCOUNTERED AN INVALID COMMAND22101024 FROM USER /139.179.197.150
-	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:41)
-	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:74)
-	at ServerBackEnd.ClientHandler.run(ClientHandler.java:49)

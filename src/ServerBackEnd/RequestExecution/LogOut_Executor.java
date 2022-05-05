@@ -2,7 +2,6 @@ package ServerBackEnd.RequestExecution;
 
 import ServerBackEnd.ClientHandler;
 import ServerBackEnd.BackendGUI_Interface;
-import NetWorkProtocol.NetworkProtocol;
 
 
 class LogOut_Executor extends Command_Executor{
@@ -14,13 +13,8 @@ class LogOut_Executor extends Command_Executor{
     //log out must always return false to log the user out;
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception{
-        myClientHandler.getOutStream().writeUTF(NetworkProtocol.User_LogOut);
-        myClientHandler.getOutStream().flush();
         BackendGUI_Interface.ClientInformationHandler(myClientHandler.getUserName() + " REQUESTED " + "LOGOUT", false);
         BackendGUI_Interface.ClientInformationHandler(myClientHandler.getUserName(), false);
-        Thread.sleep(10);
-        myClientHandler.closeEveryThing();
         return false;
     }
-
 }

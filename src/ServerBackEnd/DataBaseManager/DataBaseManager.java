@@ -9,6 +9,7 @@ import MysqlQueries.Sql_Interaction;
 import ServerBackEnd.DataBaseManager.Query.CheckBilkentIDUniquenessQuery;
 import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
+import ServerBackEnd.DataBaseManager.Query.Timetable_Retrieve_Query;
 import ServerBackEnd.DataBaseManager.Query.UserInfoQuery;
 import ServerBackEnd.DataBaseManager.Update.NewAccountUpdate;
 import ServerBackEnd.DataBaseManager.Update.RunSqlUpdate;
@@ -42,6 +43,9 @@ public class DataBaseManager {
 
         //init Bilkent ID uniqueness query
         query_map.put(Sql_Interaction.BILKENTID_UNIQUENESS_QUERY, new CheckBilkentIDUniquenessQuery(statement));
+
+        //init Timetable Retrieve query
+        query_map.put(Sql_Interaction.RETRIEVE_TIMETABLE, new Timetable_Retrieve_Query(statement));
 
     }
 

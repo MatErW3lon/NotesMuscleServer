@@ -9,4 +9,6 @@ interface Sql_Interaction_Type {
     Integer BILKENTID_UNIQUENESS_QUERY = 3;
 
     Integer CREATE_NEW_ACCOUNT_UPDATE = 4;
+
+    Integer RETRIEVE_TIMETABLE = 5;
 }
