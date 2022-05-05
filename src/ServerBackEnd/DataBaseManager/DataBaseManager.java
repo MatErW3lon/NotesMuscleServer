@@ -9,6 +9,7 @@ import MysqlQueries.Sql_Interaction;
 import ServerBackEnd.DataBaseManager.Query.CheckBilkentIDUniquenessQuery;
 import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
+import ServerBackEnd.DataBaseManager.Query.UserInfoQuery;
 import ServerBackEnd.DataBaseManager.Update.NewAccountUpdate;
 import ServerBackEnd.DataBaseManager.Update.RunSqlUpdate;
 
@@ -36,13 +37,16 @@ public class DataBaseManager {
         //init Login Query
         query_map.put(Sql_Interaction.LOGIN_QUERY, new LoginQuery(statement));
 
+        //init User info Query
+        query_map.put(Sql_Interaction.GET_USER_INFO_QUERY, new UserInfoQuery(statement));
+
         //init Bilkent ID uniqueness query
         query_map.put(Sql_Interaction.BILKENTID_UNIQUENESS_QUERY, new CheckBilkentIDUniquenessQuery(statement));
 
     }
 
     private void initUpdateMap(){
-        update_map.put(Sql_Interaction.CREATE_NEW_ACCOUNT, new NewAccountUpdate(statement));
+        update_map.put(Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE, new NewAccountUpdate(statement));
     }
 
     public Object SqlQuery(String query, Integer type) throws Exception{

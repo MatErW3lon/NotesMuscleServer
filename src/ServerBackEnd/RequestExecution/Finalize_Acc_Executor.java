@@ -30,16 +30,16 @@ class Finalize_Acc_Executor extends Create_Account_Executor{
             System.out.println("ACCOUNT CREATION EXCEPTION WAS THROWN");
             throw new AccountCreationException(userInfo);
         }
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewUserRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewLoginRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewUserRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewLoginRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
 
         //now set the timetable. there are foreign key constraints so need to update days first
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewMondayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewTuesdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewWednesdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewThursdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewFridayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
-        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewCoursesRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewMondayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewTuesdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewWednesdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewThursdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewFridayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
+        MainServer.getInstance().runSqlUpdate(Sql_Interaction.createNewCoursesRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
         createDir(getPaths(userInfo.split(NetworkProtocol.dataDelimiter)));
         return false;
     }

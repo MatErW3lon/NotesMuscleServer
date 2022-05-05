@@ -19,8 +19,9 @@ class Login_Executor extends Command_Executor{
             String sqlResult = (String) MainServer.getInstance().runSqlQuery(Sql_Interaction.createLoginUserQuery(incomingData[1], incomingData[2]), Sql_Interaction.LOGIN_QUERY );
             if(!(sqlResult == null)){    
                 myClientHandler.setUserName(incomingData[1]);
-                Thread.sleep(10);
-                myClientHandler.getOutStream().writeUTF(NetworkProtocol.SuccessFull_LOGIN);
+                String userInfo = (String) MainServer.getInstance().runSqlQuery(Sql_Interaction.createUserInfoQuery(incomingData[1]), Sql_Interaction.GET_USER_INFO_QUERY);
+                System.out.println(userInfo);
+                myClientHandler.getOutStream().writeUTF(NetworkProtocol.SuccessFull_LOGIN + NetworkProtocol.dataDelimiter + userInfo); //need to add user info here such as firstname, lastname and bilkentID
                 return true;
             }else{
                 myClientHandler.getOutStream().writeUTF(NetworkProtocol.LOGIN_FAILED);

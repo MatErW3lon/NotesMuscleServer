@@ -15,6 +15,12 @@ public interface Sql_Interaction extends Sql_Interaction_Type{
         return "select * from login_info where BilkentID = " + bilkentID;
     }
 
+    static String createUserInfoQuery(String username){
+        String queryBuilder = "select user.UserID, user.Firstname, user.Lastname from user " + 
+                                "left join login_info on login_info.Username = '" + username + "';";
+        return queryBuilder;
+    }
+
     //new user data is of the form firstname/lastname/bilkentid/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/username/password
     static String createNewUserRecordUpdate(String newUserData){
         String[] userData = newUserData.split(NetworkProtocol.dataDelimiter);
