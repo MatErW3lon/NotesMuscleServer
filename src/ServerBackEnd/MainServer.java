@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import MysqlQueries.Sql_Interaction;
 import NotesMuscles.io.*;
 import NotesMuscles.util.DirectoryManager;
 
@@ -32,9 +33,10 @@ public class MainServer extends Thread{
     ArrayList<ClientHandler> clients;
     DataBaseManager dataBaseManager;
     DirectoryManager directoryManager;
+    Sql_Interaction sql_Interaction;
     private boolean keepServerRunning = true;
 
-    public static MainServer getInstance() throws Exception{
+    public static synchronized MainServer getInstance() throws Exception{
         if(mainServer == null){
             MainServer.mainServer = new MainServer();
         }
@@ -48,7 +50,7 @@ public class MainServer extends Thread{
     private MainServer() throws Exception{
         directoryManager = new DirectoryManager();
         serverSocket  = new ServerSocket(4444);
-
+        sql_Interaction = new Sql_Interaction();
         dataBaseManager = new DataBaseManager();
         
         clients = new ArrayList<>(); 
@@ -84,7 +86,12 @@ public class MainServer extends Thread{
     }
 
     public void removeSpecificClient(ClientHandler clientHandler){
+        BackendGUI_Interface.ClientInformationHandler(clientHandler.getUserName() + " RAN INTO AN EXCEPTION ", false);
         clients.remove(clientHandler);
+    }
+
+    public Sql_Interaction getSqlInterator(){
+        return this.sql_Interaction;
     }
 
     //this method has to be synched because multiple clients will try to execute sql queries

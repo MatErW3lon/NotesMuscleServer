@@ -39,6 +39,9 @@ public class RequestExecution {
 
         //init FinalizeAccout_Executor;
         command_executors.put(NetworkProtocol.Acc_Info_Ready, new Finalize_Acc_Executor(myClientHandler));
+
+        //init TimeTable Retriever
+        command_executors.put(NetworkProtocol.RETRIEVE_TIMETABLE_REQUEST, new TimeTable_Retrieve_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{
