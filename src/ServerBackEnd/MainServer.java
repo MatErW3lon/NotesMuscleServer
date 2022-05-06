@@ -17,6 +17,7 @@ import NotesMuscles.util.DirectoryManager;
 
 public class MainServer extends Thread{
 
+    public static final int OCR_SERVER_PORT = 4445;
     public static final File requestExceptionFile;
     private static final File queryExceptionFile;
     private static final File dirManagerFile;

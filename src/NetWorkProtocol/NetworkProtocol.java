@@ -13,7 +13,7 @@ public interface NetworkProtocol {
     String SUCCESSFULL_LOGIN = "SUCCESS";
 
     String IMAGE_SEND = "IMAGE";
-    String IMAGE_STOP = "STOPIMAGE";
+    String IMAGE_STOP = "STOP_IMAGE";
     Integer IMAGE_RECEIVED_CONFIRMATION = 1;
 
     String CREATE_ACCOUNT_REQUEST = "CREATE_ACCOUNT";

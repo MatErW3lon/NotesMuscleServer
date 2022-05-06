@@ -40,7 +40,7 @@ public class ClientHandler extends Thread {
         //we keep listening on a different thread
         try{
             //System.out.println(Thread.currentThread());
-        
+            
             String client_command = dataInputStream.readUTF();
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
