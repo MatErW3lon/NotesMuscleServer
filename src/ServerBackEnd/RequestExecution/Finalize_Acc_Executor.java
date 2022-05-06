@@ -41,14 +41,14 @@ class Finalize_Acc_Executor extends Create_Account_Executor{
         mainServer.runSqlUpdate(mainServer.getSqlInteration().createNewThursdayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
         mainServer.runSqlUpdate(mainServer.getSqlInteration().createNewFridayRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
         mainServer.runSqlUpdate(mainServer.getSqlInteration().createNewCoursesRecordUpdate(userInfo), Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE);
-        createDir(getPaths(userInfo.split(NetworkProtocol.dataDelimiter)));
+        createDir(getPaths(userInfo.split(NetworkProtocol.DATA_DELIMITER)));
         return false;
     }
 
     private int countDataDelimiter(String userInfo){
         int count = 0;
         for(int i = 0; i < userInfo.length(); i++){
-            if(userInfo.charAt(i) == NetworkProtocol.dataDelimiter.charAt(0)){
+            if(userInfo.charAt(i) == NetworkProtocol.DATA_DELIMITER.charAt(0)){
                 count++;
             }
         }

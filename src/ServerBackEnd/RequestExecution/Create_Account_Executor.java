@@ -22,7 +22,7 @@ class Create_Account_Executor extends Command_Executor{
                 myClientHandler.getOutStream().writeUTF(NetworkProtocol.ACCOUNT_EXISTS_ERROR);
                 myClientHandler.getOutStream().flush();
                 bilkentID = myClientHandler.getInputStream().readUTF();
-                if(bilkentID.equals(NetworkProtocol.Cancel_Acc_Request)){
+                if(bilkentID.equals(NetworkProtocol.CANCEL_ACC_REQUEST)){
                     return false;
                 };
                 sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createBilkentIDUniquessQuery(bilkentID), Sql_Interaction.BILKENTID_UNIQUENESS_QUERY);    

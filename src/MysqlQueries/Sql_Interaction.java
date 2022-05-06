@@ -1,6 +1,6 @@
 package MysqlQueries;
 
-import NetWorkProtocol.NetworkProtocol;
+
 
 public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Update, Sql_TimeTable_Queries{
     public final String getAllLoginInfo = "select * from login_info";
@@ -16,8 +16,9 @@ public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Upd
     }
 
     public String createUserInfoQuery(String username){
-        String queryBuilder = "select user.UserID, user.Firstname, user.Lastname from user " + 
-                                "left join login_info on login_info.Username = '" + username + "';";
+        String queryBuilder = "select user.Firstname, user.Lastname, user.UserID" + 
+                              " from user, login_info " + 
+                              "where login_info.Username = '" + username + "' && login_info.UserID = user.UserID;";
         return queryBuilder;
     }
 }

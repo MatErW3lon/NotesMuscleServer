@@ -16,8 +16,8 @@ public class UserInfoQuery extends RunSqlQuery{
     public Object runSqlQuery(String query) throws Exception {
         ResultSet resultSet = statement.executeQuery(query);
         if(resultSet.next()){
-           String info = resultSet.getString("UserID") + NetworkProtocol.dataDelimiter + 
-                        resultSet.getString("Firstname") + NetworkProtocol.dataDelimiter + resultSet.getString("Lastname");
+           String info = resultSet.getString("UserID") + NetworkProtocol.DATA_DELIMITER + 
+                        resultSet.getString("Firstname") + NetworkProtocol.DATA_DELIMITER + resultSet.getString("Lastname");
            return info;             
         }
         return null;

@@ -44,7 +44,7 @@ public class ClientHandler extends Thread {
             String client_command = dataInputStream.readUTF();
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
-                String GUIBuilder = username + " REQUESTED " + client_command.split(NetworkProtocol.dataDelimiter)[0];
+                String GUIBuilder = username + " REQUESTED " + client_command.split(NetworkProtocol.DATA_DELIMITER)[0];
                 BackendGUI_Interface.ClientInformationHandler(GUIBuilder, false);
                 client_command = dataInputStream.readUTF();
             } 

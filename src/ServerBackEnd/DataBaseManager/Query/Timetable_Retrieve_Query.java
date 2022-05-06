@@ -15,9 +15,9 @@ public class Timetable_Retrieve_Query extends RunSqlQuery{
         ResultSet resultSet = statement.executeQuery(query);
         if(resultSet.next()){
             String lecturesBuilder = null;
-            lecturesBuilder = resultSet.getString("Lecture1") + NetworkProtocol.dataDelimiter + 
-                              resultSet.getString("Lecture2") + NetworkProtocol.dataDelimiter +
-                              resultSet.getString("Lecture3") + NetworkProtocol.dataDelimiter +
+            lecturesBuilder = resultSet.getString("Lecture1") + NetworkProtocol.DATA_DELIMITER + 
+                              resultSet.getString("Lecture2") + NetworkProtocol.DATA_DELIMITER +
+                              resultSet.getString("Lecture3") + NetworkProtocol.DATA_DELIMITER +
                               resultSet.getString("Lecture4");
             return lecturesBuilder;
         }

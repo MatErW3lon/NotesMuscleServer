@@ -20,32 +20,35 @@ public class RequestExecution {
 
     private void initializeMap(){
         //init Login_Executor;
-        command_executors.put(NetworkProtocol.User_LogIn, new Login_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.USER_LOGIN, new Login_Executor(myClientHandler));
 
         //init LogOut_Executor;
-        command_executors.put(NetworkProtocol.User_LogOut, new LogOut_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.USER_LOGOUT, new LogOut_Executor(myClientHandler));
 
         //init Imaga_Executor;
-        command_executors.put(NetworkProtocol.Image_Send, new Image_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.IMAGE_SEND, new Image_Executor(myClientHandler));
 
         //init ImageStop_Executor;
-        command_executors.put(NetworkProtocol.Image_Stop, new ImageStop_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.IMAGE_STOP, new ImageStop_Executor(myClientHandler));
 
         //init CreateAccount_Executor;
-        command_executors.put(NetworkProtocol.Create_Account_Request, new Create_Account_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.CREATE_ACCOUNT_REQUEST, new Create_Account_Executor(myClientHandler));
 
         //init Cancel Executor;
-        command_executors.put(NetworkProtocol.Cancel_Acc_Request, new Cancel_Acc_Creation_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.CANCEL_ACC_REQUEST, new Cancel_Acc_Creation_Executor(myClientHandler));
 
         //init FinalizeAccout_Executor;
-        command_executors.put(NetworkProtocol.Acc_Info_Ready, new Finalize_Acc_Executor(myClientHandler));
+        command_executors.put(NetworkProtocol.ACC_INFO_READY, new Finalize_Acc_Executor(myClientHandler));
 
         //init TimeTable Retriever
         command_executors.put(NetworkProtocol.RETRIEVE_TIMETABLE_REQUEST, new TimeTable_Retrieve_Executor(myClientHandler));
+
+        //init Notes Retriever
+        command_executors.put(NetworkProtocol.RETRIEVE_NOTES_REQUEST, new Notes_Retrieve_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{
-        String[] data = incomingData.split(NetworkProtocol.dataDelimiter);
+        String[] data = incomingData.split(NetworkProtocol.DATA_DELIMITER);
         if(!command_executors.containsKey(data[0])){
             throw new InvalidCommandException(data[0], myClientHandler.getSocket().getInetAddress().toString()); 
         }

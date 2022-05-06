@@ -16,12 +16,12 @@ class Login_Executor extends Command_Executor{
     public boolean executeCommand(String[] incomingData) throws Exception{
         //System.out.println("THREAD IN LOGIN: " + Thread.currentThread());
         MainServer mainServer = MainServer.getInstance();
-        if(incomingData[0].equals(NetworkProtocol.User_LogIn)){
+        if(incomingData[0].equals(NetworkProtocol.USER_LOGIN)){
             String sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createLoginUserQuery(incomingData[1], incomingData[2]), Sql_Interaction.LOGIN_QUERY );
             if(!(sqlResult == null)){    
                 myClientHandler.setUserName(incomingData[1]);
                 String userInfo = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createUserInfoQuery(incomingData[1]), Sql_Interaction.GET_USER_INFO_QUERY);
-                myClientHandler.getOutStream().writeUTF(NetworkProtocol.SuccessFull_LOGIN + NetworkProtocol.dataDelimiter + userInfo); //need to add user info here such as firstname, lastname and bilkentID
+                myClientHandler.getOutStream().writeUTF(NetworkProtocol.SUCCESSFULL_LOGIN + NetworkProtocol.DATA_DELIMITER + userInfo); //need to add user info here such as firstname, lastname and bilkentID
                 return true;
             }else{
                 myClientHandler.getOutStream().writeUTF(NetworkProtocol.LOGIN_FAILED);

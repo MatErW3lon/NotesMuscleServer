@@ -29,7 +29,7 @@ class TimeTable_Retrieve_Executor extends Command_Executor{
         resultSetsOfDayEntities[4] = (String) mainServer.runSqlQuery(sql_interaction.createFridayLecturesQuery(bilkentID), Sql_Interaction.RETRIEVE_TIMETABLE);
         String writeTimetable = "";
         for(String result : resultSetsOfDayEntities){
-            writeTimetable += result + NetworkProtocol.dataDelimiter;
+            writeTimetable += result + NetworkProtocol.DATA_DELIMITER;
         }
         byte[] bytes = writeTimetable.getBytes(StandardCharsets.UTF_8);
         myClientHandler.getOutStream().writeInt(bytes.length);
