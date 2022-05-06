@@ -34,7 +34,9 @@ class TimeTable_Retrieve_Executor extends Command_Executor{
         byte[] bytes = writeTimetable.getBytes(StandardCharsets.UTF_8);
         myClientHandler.getOutStream().writeInt(bytes.length);
         myClientHandler.getOutStream().flush();
-        int continue_to_bytes = myClientHandler.getInputStream().readInt();
+        //pause for sending bytes
+        myClientHandler.getInputStream().readInt();
+
         myClientHandler.getOutStream().write(bytes, 0, bytes.length);
         myClientHandler.getOutStream().flush();
         return true;

@@ -22,7 +22,7 @@ class Image_Executor extends Command_Executor{
 
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception{
-        System.out.println("HERE");
+       
         int imageDataLength = Integer.parseInt(incomingData[1]);
         byte[] imageBytes = new byte[imageDataLength];
         
