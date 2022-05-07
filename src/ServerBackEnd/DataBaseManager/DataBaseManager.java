@@ -12,6 +12,7 @@ import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
 import ServerBackEnd.DataBaseManager.Query.Timetable_Retrieve_Query;
 import ServerBackEnd.DataBaseManager.Query.UserInfoQuery;
+import ServerBackEnd.DataBaseManager.Update.AccountDeletionUpdate;
 import ServerBackEnd.DataBaseManager.Update.NewAccountUpdate;
 import ServerBackEnd.DataBaseManager.Update.RunSqlUpdate;
 
@@ -55,6 +56,9 @@ public class DataBaseManager {
 
     private void initUpdateMap(){
         update_map.put(Sql_Interaction.CREATE_NEW_ACCOUNT_UPDATE, new NewAccountUpdate(statement));
+
+        //init account deletion
+        update_map.put(Sql_Interaction.ACCOUNT_DELETION_UPDATE, new AccountDeletionUpdate(statement));
     }
 
     public Object SqlQuery(String query, Integer type) throws Exception{

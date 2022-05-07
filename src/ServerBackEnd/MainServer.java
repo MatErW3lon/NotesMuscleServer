@@ -163,6 +163,11 @@ public class MainServer extends Thread{
             classNotFoundException.printStackTrace(System.err);
         }
     }
+
+    public synchronized void deleteUserDir(String userID){
+        File userFile = new File(System.getProperty("user.dir") + "//client//" + userID);
+        directoryManager.deleteUserDir(userFile);
+    }
     
     public void closeEveryThing() throws IOException{
         //need to close all client sockets also

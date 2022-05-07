@@ -23,6 +23,7 @@ public class BackendGUI_Interface {
     }
 
     public static void resetClientInformation(){
+        System.out.println("HERE");
         Client_Information = new ArrayList<>();
     }
 }

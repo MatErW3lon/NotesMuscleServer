@@ -18,7 +18,6 @@ class Login_Executor extends Command_Executor{
         MainServer mainServer = MainServer.getInstance();
         if(incomingData[0].equals(NetworkProtocol.USER_LOGIN)){
             String hashed_password = mainServer.getSha256Hash(incomingData[2]);
-            System.out.println(hashed_password);
             String sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createLoginUserQuery(incomingData[1], hashed_password), Sql_Interaction.LOGIN_QUERY );
             if(!(sqlResult == null)){    
                 myClientHandler.setUserName(incomingData[1]);

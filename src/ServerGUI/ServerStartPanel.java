@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ public class ServerStartPanel extends JPanel implements Runnable{
     
     //private class attributes
     JTextArea clientInfoTextArea;
+    JScrollPane clientsInfoScrollPane;
     JButton closeServerBtn;
     JLabel clientInfoLabel;
     final int WIDHT = 400;
@@ -39,6 +42,9 @@ public class ServerStartPanel extends JPanel implements Runnable{
         clientInfoTextArea.setForeground(Color.white);
         clientInfoTextArea.append("CLIENT USERNAMES");
 
+        clientsInfoScrollPane = new JScrollPane(clientInfoTextArea);
+        clientsInfoScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         closeServerBtn = new JButton("CLOSE THE SERVER");
         closeServerBtn.setFocusable(false);
         closeServerBtn.setFont(MainFrame.GLOBAL_FONT);
@@ -57,7 +63,7 @@ public class ServerStartPanel extends JPanel implements Runnable{
         clientInfoLabel.setFont(MainFrame.GLOBAL_FONT);
 
         add(clientInfoLabel, BorderLayout.NORTH);
-        add(clientInfoTextArea, BorderLayout.CENTER);
+        add(clientsInfoScrollPane, BorderLayout.CENTER);
         add(closeServerBtn, BorderLayout.SOUTH);
 
         exit = false;

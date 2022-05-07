@@ -45,6 +45,9 @@ public class RequestExecution {
 
         //init Notes Retriever
         command_executors.put(NetworkProtocol.RETRIEVE_NOTES_REQUEST, new Notes_Retrieve_Executor(myClientHandler));
+
+        //init Account Deletion
+        command_executors.put(NetworkProtocol.DELETE_ACCOUNT_REQUEST, new Delete_Acc_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{

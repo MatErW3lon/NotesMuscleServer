@@ -2,7 +2,7 @@ package MysqlQueries;
 
 import NetWorkProtocol.NetworkProtocol;
 
-public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Update, Sql_TimeTable_Queries{
+public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Update, Sql_TimeTable_Queries, Sql_Acc_Deletion_Updates{
     
     public final String getAllLoginInfo = "select * from login_info";
     public final String getAllUserInfo = "select * from user";

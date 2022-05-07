@@ -13,4 +13,6 @@ interface Sql_Interaction_Type {
     Integer RETRIEVE_TIMETABLE = 5;
 
     Integer GET_LECTURE_FROM_DATE = 6;
+
+    Integer ACCOUNT_DELETION_UPDATE = 7;
 }

@@ -50,6 +50,7 @@ public class ClientHandler extends Thread {
             } 
             
         }catch(Exception exception){
+            System.out.println(exception.getClass().toString());
             if(exception instanceof InvalidFirstCommand || exception instanceof InvalidCommandException || exception instanceof AccountCreationException){
                 try{
                     exception.printStackTrace(new PrintStream(MainServer.requestExceptionFile));
@@ -93,6 +94,7 @@ public class ClientHandler extends Thread {
         this.user_name = username;
     }
 
+    //form UserID/Firstname/Lastname
     public String getUserInfo(){
         return this.user_info;
     }

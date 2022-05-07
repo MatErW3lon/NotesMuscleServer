@@ -71,4 +71,15 @@ public class DirectoryManager {
             fileOutputStream.close();
         }
     }
+
+    public void deleteUserDir(File userFile){
+        File[] contents = userFile.listFiles();
+        if(contents != null){
+            for(File subFile : contents){
+                deleteUserDir(subFile);
+            }
+        }
+        userFile.delete();
+    }
+
 }
