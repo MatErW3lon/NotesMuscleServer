@@ -125,7 +125,7 @@ public class MainServer extends Thread{
     
     public synchronized void createNewDir(String[] clientInfo){
         try{
-            MainServer.getInstance().directoryManager.createClientDirOnNewAccount(clientInfo);
+            directoryManager.createClientDirOnNewAccount(clientInfo);
         }catch(Exception e){
             if(e instanceof DirCreationException){
                 try {
@@ -136,6 +136,18 @@ public class MainServer extends Thread{
             }else{
                 e.printStackTrace(System.err);
             }
+        }
+    }
+
+    public synchronized void createNewNotesFile(String filepath, String coursesID, String lecture, String file_name){
+        try{
+            directoryManager.createNewNotesFile(filepath, coursesID ,lecture, file_name);
+        }catch(IOException ioException){
+            System.err.println("An exception occured on account creation");
+            ioException.printStackTrace(System.err);
+        }catch(ClassNotFoundException classNotFoundException){
+            System.err.println("An exception occured while reading .dat from " + coursesID + "//" + lecture);
+            classNotFoundException.printStackTrace(System.err);
         }
     }
     

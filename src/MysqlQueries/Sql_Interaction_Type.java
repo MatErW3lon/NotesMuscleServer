@@ -11,4 +11,6 @@ interface Sql_Interaction_Type {
     Integer CREATE_NEW_ACCOUNT_UPDATE = 4;
 
     Integer RETRIEVE_TIMETABLE = 5;
+
+    Integer GET_LECTURE_FROM_DATE = 6;
 }

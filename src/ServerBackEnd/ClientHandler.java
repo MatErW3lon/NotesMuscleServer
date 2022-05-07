@@ -43,14 +43,14 @@ public class ClientHandler extends Thread {
             //System.out.println(Thread.currentThread());
             
             String client_command = dataInputStream.readUTF();
+            
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
                 String GUIBuilder = user_name + " REQUESTED " + client_command.split(NetworkProtocol.DATA_DELIMITER)[0];
                 BackendGUI_Interface.ClientInformationHandler(GUIBuilder, false);
                 client_command = dataInputStream.readUTF();
             } 
-            closeEveryThing();
-
+            
         }catch(Exception exception){
             if(exception instanceof InvalidFirstCommand || exception instanceof InvalidCommandException || exception instanceof AccountCreationException){
                 try{

@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.charset.StandardCharsets;
 
 //import NetWorkProtocol.NetworkProtocol;
 import ServerBackEnd.ClientHandler;
@@ -47,7 +46,7 @@ class Image_Executor extends Command_Executor{
         int imageDataLength = Integer.parseInt(incomingData[1]);
         byte[] imageBytes = new byte[imageDataLength];
         myClientHandler.getInputStream().readFully(imageBytes);
-        //init_ocr_connection(imageBytes, imageDataLength, notes_Builder);
+        init_ocr_connection(imageBytes, imageDataLength, notes_Builder);
 
         /*ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
         BufferedImage bImage = ImageIO.read(bis);
@@ -71,8 +70,8 @@ class Image_Executor extends Command_Executor{
                     ocr_outputStream.flush();
 
                     //now we wait for the response and build the notes data
-                    notes_data += ocr_inputStream.readUTF();
-                    notes_Builder.appendToFile(notes_data.getBytes(StandardCharsets.UTF_8));
+                    notes_data = ocr_inputStream.readUTF();
+                    notes_Builder.appendToFile(notes_data);
                     System.out.println("NOTES DATA: " + notes_data);
                 }catch (IOException e) {
                     closeOcrConnection();

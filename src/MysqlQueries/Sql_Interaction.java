@@ -7,6 +7,7 @@ public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Upd
     public final String getAllLoginInfo = "select * from login_info";
     public final String getAllUserInfo = "select * from user";
     public final String getAllCoursesInfo = "select * from courses";
+    private String queryBuilder;
 
     public String createLoginUserQuery(String username, String password){
         return "select BilkentID from login_info where Username = '" + username + "' and Password = '" + password + "'";
@@ -17,15 +18,16 @@ public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Upd
     }
 
     public String createUserInfoQuery(String username){
-        String queryBuilder = "select user.Firstname, user.Lastname, user.UserID" + 
+        queryBuilder = "select user.Firstname, user.Lastname, user.UserID" + 
                               " from user, login_info " + 
                               "where login_info.Username = '" + username + "' && login_info.UserID = user.UserID;";
         return queryBuilder;
     }
 
-    public String createGetCurrentLectureQuery(String userID ,String dayCol, String lectureCol){
-        System.out.println(userID + NetworkProtocol.DATA_DELIMITER + dayCol + NetworkProtocol.DATA_DELIMITER + lectureCol);
-        return null;
+    public String createGetCurrentLectureQuery(String coursesID, String dayCol, String dayEntity, String lectureCol){
+        System.out.println(coursesID + NetworkProtocol.DATA_DELIMITER + dayCol + NetworkProtocol.DATA_DELIMITER + lectureCol);
+        queryBuilder = "select " + lectureCol + " from " + dayEntity + " where " + dayCol + " = (select " + dayCol + " from courses where CoursesID = " + coursesID+ " );";
+        return queryBuilder;
     }
 
     //helper method for getting current lecture...need to map the lecture column to date

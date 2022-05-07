@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 import MysqlQueries.Sql_Interaction;
 import ServerBackEnd.DataBaseManager.Query.CheckBilkentIDUniquenessQuery;
+import ServerBackEnd.DataBaseManager.Query.LectureFromDateQuery;
 import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
 import ServerBackEnd.DataBaseManager.Query.Timetable_Retrieve_Query;
@@ -46,6 +47,9 @@ public class DataBaseManager {
 
         //init Timetable Retrieve query
         query_map.put(Sql_Interaction.RETRIEVE_TIMETABLE, new Timetable_Retrieve_Query(statement));
+
+        //init Lecture Retrieve query
+        query_map.put(Sql_Interaction.GET_LECTURE_FROM_DATE, new LectureFromDateQuery(statement));
 
     }
 

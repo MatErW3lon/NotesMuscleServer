@@ -1,0 +1,1 @@
+select Lecture4 from thursday where ThursdayID = (select ThursdayID from courses where CoursesID = 22101023);

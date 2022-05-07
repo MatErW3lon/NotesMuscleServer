@@ -1,18 +1,19 @@
 package NotesMuscles.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
 
 import NotesMuscles.io.DirCreationException;
 
 public class DirectoryManager {
     
-    public DirectoryManager(){
-
-    }
+    public DirectoryManager(){}
 
     /**
      * 
@@ -48,5 +49,26 @@ public class DirectoryManager {
             createFile.close();
         }
         //the notes arraylist stores the names of each text file as <name>.txt;
+    }
+
+    public void createNewNotesFile(String path, String coursesID, String lecture, String file_name) throws IOException, ClassNotFoundException{
+        File new_notes_file = new File(path + ".txt");
+        if(!new_notes_file.exists()){
+            System.out.println("FILE CREATED");
+            new_notes_file.createNewFile();
+            //now we need to add the file_name to the .dat file in the respective dir
+            FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "//client//" + coursesID + "//" + lecture + "//notes_arraylist.dat");
+            ObjectInputStream objInputStram = new ObjectInputStream(fileInputStream);
+            ArrayList<String> notes_arraylist = (ArrayList<String>) objInputStram.readObject();
+            notes_arraylist.add(file_name);
+            objInputStram.close();
+            fileInputStream.close();
+            //write it back
+            FileOutputStream fileOutputStream = new FileOutputStream(System.getProperty("user.dir") + "//client//" + coursesID + "//" + lecture + "//notes_arraylist.dat");
+            ObjectOutputStream objOutputStream = new ObjectOutputStream(fileOutputStream);
+            objOutputStream.writeObject(notes_arraylist);
+            objInputStram.close();
+            fileOutputStream.close();
+        }
     }
 }
