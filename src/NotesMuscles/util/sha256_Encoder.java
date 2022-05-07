@@ -5,20 +5,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class sha256 {
+public class sha256_Encoder {
 
     String hashableWord ;
     String resultString ;
 
-    public sha256(String input) throws NoSuchAlgorithmException{
-        hashableWord = input ;
-        byte[] temp =  this.getSHA() ;
-        resultString = toHexString(temp) ;
-        
-        
-    }
-    
-    public byte[] getSHA() throws NoSuchAlgorithmException
+    private byte[] getSHA() throws NoSuchAlgorithmException
     {
         // Static getInstance method is called with hashing SHA
         MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -29,7 +21,7 @@ public class sha256 {
         return md.digest(hashableWord.getBytes(StandardCharsets.UTF_8));
     }
      
-    public String toHexString(byte[] hash)
+    private String toHexString(byte[] hash)
     {
         // Convert byte array into signum representation
         BigInteger number = new BigInteger(1, hash);
@@ -46,7 +38,10 @@ public class sha256 {
         return hexString.toString();
     }
 
-    public String getHashed(){
+    public String getHashed(String input) throws NoSuchAlgorithmException{
+        hashableWord = input ;
+        byte[] temp =  this.getSHA() ;
+        resultString = toHexString(temp) ; 
         return resultString;
     }
 }

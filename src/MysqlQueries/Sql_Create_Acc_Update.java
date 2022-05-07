@@ -1,6 +1,9 @@
 package MysqlQueries;
 
+import java.security.NoSuchAlgorithmException;
+
 import NetWorkProtocol.NetworkProtocol;
+import NotesMuscles.util.sha256_Encoder;
 
 interface Sql_Create_Acc_Update {
     //new user data is of the form firstname/lastname/bilkentid/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/dayID/lec1/lec2/lec3/lec4/username/password
@@ -12,11 +15,13 @@ interface Sql_Create_Acc_Update {
         return updateBuilder;
     }
 
-    public default String createNewLoginRecordUpdate(String newUserData){
+    public default String createNewLoginRecordUpdate(String newUserData) throws NoSuchAlgorithmException{
+        sha256_Encoder tempSha256_Encoder = new sha256_Encoder();
         String[] userData = newUserData.split(NetworkProtocol.DATA_DELIMITER);
+        String hashed_password = tempSha256_Encoder.getHashed(userData[userData.length - 1]);
         String updateBuilder = "INSERT INTO `notesmuscle`.`login_info`" +
                                 "(`BilkentID`,`Username`,`Password`,`UserID`)" +
-                                "VALUES (" + userData[2] + ",'" + userData[userData.length - 2] +"','" + userData[userData.length - 1] + "'," + userData[2] + ");";
+                                "VALUES (" + userData[2] + ",'" + userData[userData.length - 2] +"','" + hashed_password + "'," + userData[2] + ");";
         return updateBuilder;
     }
 

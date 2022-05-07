@@ -1,4 +1,5 @@
-NotesMuscles.io.InvalidCommandException: THE NETWORK ENCOUNTERED AN INVALID COMMANDSTOP_IMAGE FROM USER /139.179.197.150
-	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:53)
-	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:72)
-	at ServerBackEnd.ClientHandler.run(ClientHandler.java:46)
+NotesMuscles.io.InvalidFirstCommand: THE FIRST COMMAND WAS NOT LOGIN FROM USER /139.179.197.150
+	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:35)
+	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:56)
+	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:73)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:48)

@@ -6,14 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+
 import NotesMuscles.io.*;
 import ServerBackEnd.RequestExecution.RequestExecution;
 import NetWorkProtocol.NetworkProtocol;
 
-/*
-    CURRENT ASSUMPTION: the client thread cannot read and write at the same time
-    THe server only writes to the user when it receives a request from the user
-*/
 public class ClientHandler extends Thread {
     
     private MainServer mainServer;
@@ -21,7 +19,7 @@ public class ClientHandler extends Thread {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private RequestExecution requestExecution;
-    private String command, user_name, user_info;
+    private String user_name, user_info;
     private Notes_Builder myNotes_Builder;
 
     public ClientHandler(Socket clientSocket, MainServer mainServer) throws IOException{
@@ -43,7 +41,7 @@ public class ClientHandler extends Thread {
             //System.out.println(Thread.currentThread());
             
             String client_command = dataInputStream.readUTF();
-            
+
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
                 String GUIBuilder = user_name + " REQUESTED " + client_command.split(NetworkProtocol.DATA_DELIMITER)[0];
@@ -58,16 +56,18 @@ public class ClientHandler extends Thread {
                 }catch(FileNotFoundException fileNotFoundException){
                     fileNotFoundException.printStackTrace(System.err);
                 }
-            }else{
-                exception.printStackTrace(System.err);
+            }else if(exception instanceof NoSuchAlgorithmException){
+                System.err.println("NoSUchAlgoEx on account creation -> password hash");
+            }    
+            exception.printStackTrace(System.err);
             }
             try {
                 closeEveryThing();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }       
-    }
+        }
+    }       
+    
 
     public boolean executeCommand(String command) throws Exception{
         return requestExecution.executeCommand(command);

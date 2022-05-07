@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import MysqlQueries.Sql_Interaction;
 import NotesMuscles.io.*;
 import NotesMuscles.util.DirectoryManager;
+import NotesMuscles.util.sha256_Encoder;
 
 public class MainServer extends Thread{
 
@@ -35,6 +37,7 @@ public class MainServer extends Thread{
     private DataBaseManager dataBaseManager;
     private DirectoryManager directoryManager;
     private Sql_Interaction sql_Interaction;
+    private sha256_Encoder mySha256_Encoder;
     private boolean keepServerRunning = true;
 
     public static synchronized MainServer getInstance() throws Exception{
@@ -53,7 +56,7 @@ public class MainServer extends Thread{
         serverSocket  = new ServerSocket(4444);
         sql_Interaction = new Sql_Interaction();
         dataBaseManager = new DataBaseManager();
-        
+        mySha256_Encoder = new sha256_Encoder();
         clients = new ArrayList<>(); 
     }
 
@@ -93,6 +96,16 @@ public class MainServer extends Thread{
 
     public synchronized Sql_Interaction getSqlInteration(){
         return this.sql_Interaction;
+    }
+
+    public synchronized String getSha256Hash(String input){
+        try{
+            return this.mySha256_Encoder.getHashed(input);
+        }catch(NoSuchAlgorithmException noSuchAlgorithmException){
+            System.err.println("NoSuchAlgorithmException was thrown");
+            noSuchAlgorithmException.printStackTrace();
+            return null;
+        }
     }
 
     //this method has to be synched because multiple clients will try to execute sql queries
