@@ -16,12 +16,13 @@ import NetWorkProtocol.NetworkProtocol;
 */
 public class ClientHandler extends Thread {
     
-    MainServer mainServer;
-    Socket clientSocket;
-    DataInputStream dataInputStream;
-    DataOutputStream dataOutputStream;
-    RequestExecution requestExecution;
-    String command, username;
+    private MainServer mainServer;
+    private Socket clientSocket;
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
+    private RequestExecution requestExecution;
+    private String command, user_name, user_info;
+    private Notes_Builder myNotes_Builder;
 
     public ClientHandler(Socket clientSocket, MainServer mainServer) throws IOException{
         requestExecution = new RequestExecution(this);
@@ -44,7 +45,7 @@ public class ClientHandler extends Thread {
             String client_command = dataInputStream.readUTF();
             //notice that all commands will return true except the logOut
             while(executeCommand(client_command)){
-                String GUIBuilder = username + " REQUESTED " + client_command.split(NetworkProtocol.DATA_DELIMITER)[0];
+                String GUIBuilder = user_name + " REQUESTED " + client_command.split(NetworkProtocol.DATA_DELIMITER)[0];
                 BackendGUI_Interface.ClientInformationHandler(GUIBuilder, false);
                 client_command = dataInputStream.readUTF();
             } 
@@ -85,11 +86,27 @@ public class ClientHandler extends Thread {
     }
 
     public String getUserName(){
-        return this.username;
+        return this.user_name;
     }
 
     public void setUserName(String username){
-        this.username = username;
+        this.user_name = username;
+    }
+
+    public String getUserInfo(){
+        return this.user_info;
+    }
+
+    public void setUserInfo(String user_info){
+        this.user_info = user_info;
+    }
+
+    public void setNotesBuilder(){
+        myNotes_Builder = new Notes_Builder(this);
+    }
+
+    public Notes_Builder getNotesBuilder(){
+        return this.myNotes_Builder;
     }
 
     public void closeEveryThing() throws IOException{

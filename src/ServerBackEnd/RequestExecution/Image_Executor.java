@@ -9,10 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 
 //import NetWorkProtocol.NetworkProtocol;
 import ServerBackEnd.ClientHandler;
 import ServerBackEnd.MainServer;
+import ServerBackEnd.Notes_Builder;
 
 /**
  * Image_Executor
@@ -35,10 +37,18 @@ class Image_Executor extends Command_Executor{
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception{
         System.out.println("HERE IN IMAGE SEND");
+        String dateOfReceive = incomingData[2];
+        Notes_Builder notes_Builder = myClientHandler.getNotesBuilder();
+        notes_Builder.setDate(dateOfReceive);
+        if(!notes_Builder.createdNotesFile){
+            notes_Builder.createNotesFile();
+        }
+
         int imageDataLength = Integer.parseInt(incomingData[1]);
         byte[] imageBytes = new byte[imageDataLength];
         myClientHandler.getInputStream().readFully(imageBytes);
-        init_ocr_connection(imageBytes, imageDataLength);
+        //init_ocr_connection(imageBytes, imageDataLength, notes_Builder);
+
         /*ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
         BufferedImage bImage = ImageIO.read(bis);
         ImageIO.write(bImage, "png", new File(System.getProperty("user.dir") + "\\ocr_image_buffer\\image" + imageCount + "_" + myClientHandler.getUserName() + ".png"));
@@ -46,7 +56,7 @@ class Image_Executor extends Command_Executor{
         return true;
     }
 
-    private void init_ocr_connection(byte[] img_bytes, int imageDataLength) throws UnknownHostException, IOException{
+    private void init_ocr_connection(byte[] img_bytes, int imageDataLength, Notes_Builder notes_Builder) throws UnknownHostException, IOException{
         //attempt handshake
         ocr_clientsocket = new Socket("localhost", MainServer.OCR_SERVER_PORT);
         ocr_inputStream = new DataInputStream(ocr_clientsocket.getInputStream());
@@ -62,6 +72,7 @@ class Image_Executor extends Command_Executor{
 
                     //now we wait for the response and build the notes data
                     notes_data += ocr_inputStream.readUTF();
+                    notes_Builder.appendToFile(notes_data.getBytes(StandardCharsets.UTF_8));
                     System.out.println("NOTES DATA: " + notes_data);
                 }catch (IOException e) {
                     closeOcrConnection();

@@ -30,11 +30,11 @@ public class MainServer extends Thread{
         mainServer = null;
     }
 
-    ServerSocket serverSocket;
-    ArrayList<ClientHandler> clients;
-    DataBaseManager dataBaseManager;
-    DirectoryManager directoryManager;
-    Sql_Interaction sql_Interaction;
+    private ServerSocket serverSocket;
+    private ArrayList<ClientHandler> clients;
+    private DataBaseManager dataBaseManager;
+    private DirectoryManager directoryManager;
+    private Sql_Interaction sql_Interaction;
     private boolean keepServerRunning = true;
 
     public static synchronized MainServer getInstance() throws Exception{
