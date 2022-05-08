@@ -7,8 +7,10 @@ import NetWorkProtocol.NetworkProtocol;
 
 import java.util.ArrayList;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +23,7 @@ class Notes_Retrieve_Executor extends Command_Executor{
         super(myClientHandler);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception {
         String bilkentID = incomingData[1];
@@ -64,18 +67,36 @@ class Notes_Retrieve_Executor extends Command_Executor{
         if(pathToTxtFile.equals(NetworkProtocol.CANCEL_NOTES)){
             return true;
         }
+        pathToTxtFile = System.getProperty("user.dir") + "//client//" + bilkentID + "//" + selected_course + "//" + pathToTxtFile + ".txt";
 
-        byte[] txt_data_byte = getTextFileDataBytes(System.getProperty("user.dir") + "//client//" + bilkentID + "//" + selected_course + "//" + pathToTxtFile + ".txt");
+        byte[] txt_data_byte = getTextFileDataBytes(pathToTxtFile);
         //now we write the text data
         myClientHandler.getOutStream().writeInt(txt_data_byte.length);
         myClientHandler.getOutStream().flush();
         Thread.sleep(10);
         myClientHandler.getOutStream().write(txt_data_byte, 0, txt_data_byte.length);
         myClientHandler.getOutStream().flush();
+
+        String chooseEdit = myClientHandler.getInputStream().readUTF();
+        if(chooseEdit.equals(NetworkProtocol.CANCEL_NOTES)){
+            return true;
+        }
+        //now we wait for the edit.....
+        String edittedText = myClientHandler.getInputStream().readUTF();
+        if(edittedText.equals(NetworkProtocol.CANCEL_NOTES)){
+            return true;
+        }
+        setTextFileToStr(pathToTxtFile ,edittedText);
         return true;
     }
 
-     private String getTextFilesStr() {
+    private void setTextFileToStr(String pathToTxtFile, String edittedText) throws IOException {
+        FileWriter editWriter = new FileWriter(new File(pathToTxtFile));
+        editWriter.write(edittedText);
+        editWriter.close();
+    }
+
+    private String getTextFilesStr() {
         String rtnString = notes_paths_arraylist.size() + NetworkProtocol.DATA_DELIMITER;
         for(String temp : notes_paths_arraylist){
             rtnString += temp + NetworkProtocol.DATA_DELIMITER;
