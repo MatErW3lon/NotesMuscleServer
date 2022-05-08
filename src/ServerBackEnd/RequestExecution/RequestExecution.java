@@ -6,6 +6,7 @@ import java.util.Map;
 import ServerBackEnd.*;
 import NetWorkProtocol.NetworkProtocol;
 import NotesMuscles.io.*;
+//import NotesMuscles.util.HashMap;
 
 public class RequestExecution {
    
@@ -51,6 +52,9 @@ public class RequestExecution {
 
         //init Account Deletion
         command_executors.put(NetworkProtocol.DELETE_ACCOUNT_REQUEST, new Delete_Acc_Executor(myClientHandler));
+
+        //init Global Chat Executor
+        command_executors.put(NetworkProtocol.PULL_GLOBAL_CHAT, new Global_Chat_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{

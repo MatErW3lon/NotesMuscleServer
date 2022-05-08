@@ -79,5 +79,4 @@ class Edit_TimeTable_Executor extends Command_Executor{
         String lecturePath = bilkentID + "//" + courseToDrop;
         mainServer.deleteLectureDir(lecturePath);
     }
-
 }

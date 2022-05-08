@@ -30,4 +30,8 @@ public interface NetworkProtocol {
 
     //Account deletion
     String DELETE_ACCOUNT_REQUEST = "DELETE_ACC";
+
+    //Global Chat
+    String PULL_GLOBAL_CHAT = "GET_CHAT";
+    String END_GLOBAL_CHAT = "END_CHAT";
 }

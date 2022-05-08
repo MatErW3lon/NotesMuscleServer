@@ -183,6 +183,12 @@ public class MainServer extends Thread{
             ioException.printStackTrace(System.err);
         }
     }
+
+    public synchronized void broadCastGlobalChatFrom(ClientHandler sending_client, String message){
+        for(ClientHandler client_connected : clients){
+            client_connected.sendMessage(sending_client.getUserName() + ": " + message);
+        }
+    }
     
     public void closeEveryThing() throws IOException{
         //need to close all client sockets also

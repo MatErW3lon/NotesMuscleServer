@@ -25,7 +25,6 @@ class Finalize_Acc_Executor extends Create_Account_Executor{
         myClientHandler.getOutStream().flush();
         myClientHandler.getInputStream().readFully(accountInfoBytes);
         String userInfo = new String(accountInfoBytes, StandardCharsets.UTF_8);
-        System.out.println(userInfo);
         if(countDataDelimiter(userInfo) != delimiterCount){
             System.out.println("ACCOUNT CREATION EXCEPTION WAS THROWN");
             throw new AccountCreationException(userInfo);

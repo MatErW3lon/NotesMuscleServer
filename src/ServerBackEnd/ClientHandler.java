@@ -14,6 +14,11 @@ import NetWorkProtocol.NetworkProtocol;
 
 public class ClientHandler extends Thread {
     
+    //these constants are used by the chat buffer thread
+    public static final int FLUSH_MESSAGES = 1;
+    public static final int BUFFER_MESSAGES = 2;
+    public static final int END_CHAT_BUFFER_THREAD = 3;
+
     private MainServer mainServer;
     private Socket clientSocket;
     private DataInputStream dataInputStream;
@@ -21,8 +26,13 @@ public class ClientHandler extends Thread {
     private RequestExecution requestExecution;
     private String user_name, user_info;
     private Notes_Builder myNotes_Builder;
+    private Chat_Buffer my_Global_Chat_Buffer;
+    public volatile int flush_global_messages;
 
     public ClientHandler(Socket clientSocket, MainServer mainServer) throws IOException{
+        flush_global_messages = BUFFER_MESSAGES;
+        my_Global_Chat_Buffer = new Chat_Buffer(this);
+
         requestExecution = new RequestExecution(this);
         this.clientSocket = clientSocket;
         this.mainServer = mainServer;
@@ -48,6 +58,7 @@ public class ClientHandler extends Thread {
                 BackendGUI_Interface.ClientInformationHandler(GUIBuilder, false);
                 client_command = dataInputStream.readUTF();
             } 
+            closeEveryThing();
             
         }catch(Exception exception){
             System.out.println(exception.getClass().toString());
@@ -58,7 +69,7 @@ public class ClientHandler extends Thread {
                     fileNotFoundException.printStackTrace(System.err);
                 }
             }else if(exception instanceof NoSuchAlgorithmException){
-                System.err.println("NoSUchAlgoEx on account creation -> password hash");
+                System.err.println("NoSuchAlgoEx on account creation -> password hash");
             }    
             exception.printStackTrace(System.err);
             }
@@ -72,6 +83,10 @@ public class ClientHandler extends Thread {
 
     public boolean executeCommand(String command) throws Exception{
         return requestExecution.executeCommand(command);
+    }
+
+    public void sendMessage(String message) {
+        my_Global_Chat_Buffer.buffer_message(message);
     }
 
     public DataOutputStream getOutStream(){
@@ -124,8 +139,10 @@ public class ClientHandler extends Thread {
                 clientSocket.close();
                 clientSocket = null;
             }
+            flush_global_messages = END_CHAT_BUFFER_THREAD;
             requestExecution = null;
             mainServer.removeSpecificClient(this);
     //we need to notify the arraylist of client handlers to remove this client
     }
+
 }
