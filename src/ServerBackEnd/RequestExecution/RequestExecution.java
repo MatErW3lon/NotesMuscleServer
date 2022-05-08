@@ -43,6 +43,9 @@ public class RequestExecution {
         //init TimeTable Retriever
         command_executors.put(NetworkProtocol.RETRIEVE_TIMETABLE_REQUEST, new TimeTable_Retrieve_Executor(myClientHandler));
 
+        //init TimeTable Edit 
+        command_executors.put(NetworkProtocol.EDIT_TIMETABLE_REQUEST, new Edit_TimeTable_Executor(myClientHandler));
+
         //init Notes Retriever
         command_executors.put(NetworkProtocol.RETRIEVE_NOTES_REQUEST, new Notes_Retrieve_Executor(myClientHandler));
 

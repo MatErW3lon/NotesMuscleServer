@@ -168,6 +168,21 @@ public class MainServer extends Thread{
         File userFile = new File(System.getProperty("user.dir") + "//client//" + userID);
         directoryManager.deleteUserDir(userFile);
     }
+
+    public synchronized void deleteLectureDir(String lecturePath){
+        File lectureFile = new File(System.getProperty("user.dir") + "//client//" + lecturePath);
+        directoryManager.deleteLectureDir(lectureFile);
+    }
+    
+    public synchronized void createNewLectureDir(String newLecturePath) {
+        try{
+            newLecturePath = System.getProperty("user.dir") + "//client//" + newLecturePath;
+            directoryManager.newLectureDir(newLecturePath);
+        }catch(IOException ioException){
+            System.err.println("An error occured in Timetable -> new lecture dir");
+            ioException.printStackTrace(System.err);
+        }
+    }
     
     public void closeEveryThing() throws IOException{
         //need to close all client sockets also
@@ -178,7 +193,8 @@ public class MainServer extends Thread{
                 serverSocket.close();
             }
             dataBaseManager = null;
+            directoryManager = null;
+            sql_Interaction = null;
     }
-
     
 }

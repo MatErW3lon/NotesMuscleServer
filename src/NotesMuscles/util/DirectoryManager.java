@@ -2,6 +2,7 @@ package NotesMuscles.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -51,6 +52,7 @@ public class DirectoryManager {
         //the notes arraylist stores the names of each text file as <name>.txt;
     }
 
+    @SuppressWarnings("unchecked")
     public void createNewNotesFile(String path, String coursesID, String lecture, String file_name) throws IOException, ClassNotFoundException{
         File new_notes_file = new File(path + ".txt");
         if(!new_notes_file.exists()){
@@ -58,16 +60,16 @@ public class DirectoryManager {
             new_notes_file.createNewFile();
             //now we need to add the file_name to the .dat file in the respective dir
             FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "//client//" + coursesID + "//" + lecture + "//notes_arraylist.dat");
-            ObjectInputStream objInputStram = new ObjectInputStream(fileInputStream);
-            ArrayList<String> notes_arraylist = (ArrayList<String>) objInputStram.readObject();
+            ObjectInputStream objInputStream = new ObjectInputStream(fileInputStream);
+            ArrayList<String> notes_arraylist = (ArrayList<String>) objInputStream.readObject();
             notes_arraylist.add(file_name);
-            objInputStram.close();
+            objInputStream.close();
             fileInputStream.close();
             //write it back
             FileOutputStream fileOutputStream = new FileOutputStream(System.getProperty("user.dir") + "//client//" + coursesID + "//" + lecture + "//notes_arraylist.dat");
             ObjectOutputStream objOutputStream = new ObjectOutputStream(fileOutputStream);
             objOutputStream.writeObject(notes_arraylist);
-            objInputStram.close();
+            objInputStream.close();
             fileOutputStream.close();
         }
     }
@@ -82,4 +84,27 @@ public class DirectoryManager {
         userFile.delete();
     }
 
+    public void deleteLectureDir(File lectureFile){
+        File[] contents = lectureFile.listFiles();
+        if(contents != null){
+            for(File subFile : contents){
+                deleteUserDir(subFile);
+            }
+        }
+        lectureFile.delete();
+    }
+
+    public void newLectureDir(String newLecturePath) throws IOException {
+        File lectureDir = new File(newLecturePath);
+        if (!lectureDir.exists()) {
+            if (lectureDir.mkdir()) {
+                File notes_arraylist_dat_file = new File(newLecturePath + "//notes_arraylist.dat");
+                FileOutputStream createFile = new FileOutputStream(notes_arraylist_dat_file);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(createFile);
+                objectOutputStream.writeObject(new ArrayList<String>());
+                objectOutputStream.close();
+                createFile.close();
+            }
+        }
+    }
 }

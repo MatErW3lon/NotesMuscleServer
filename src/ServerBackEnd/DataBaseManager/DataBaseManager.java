@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 import MysqlQueries.Sql_Interaction;
 import ServerBackEnd.DataBaseManager.Query.CheckBilkentIDUniquenessQuery;
+import ServerBackEnd.DataBaseManager.Query.Get_Specific_Lecture;
 import ServerBackEnd.DataBaseManager.Query.LectureFromDateQuery;
 import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
@@ -15,6 +16,7 @@ import ServerBackEnd.DataBaseManager.Query.UserInfoQuery;
 import ServerBackEnd.DataBaseManager.Update.AccountDeletionUpdate;
 import ServerBackEnd.DataBaseManager.Update.NewAccountUpdate;
 import ServerBackEnd.DataBaseManager.Update.RunSqlUpdate;
+import ServerBackEnd.DataBaseManager.Update.UpdateSpecificLecture;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -49,6 +51,9 @@ public class DataBaseManager {
         //init Timetable Retrieve query
         query_map.put(Sql_Interaction.RETRIEVE_TIMETABLE, new Timetable_Retrieve_Query(statement));
 
+        //init Get Specific Lecture
+        query_map.put(Sql_Interaction.GET_SPECIFIC_LECTURE, new Get_Specific_Lecture(statement));
+
         //init Lecture Retrieve query
         query_map.put(Sql_Interaction.GET_LECTURE_FROM_DATE, new LectureFromDateQuery(statement));
 
@@ -59,6 +64,9 @@ public class DataBaseManager {
 
         //init account deletion
         update_map.put(Sql_Interaction.ACCOUNT_DELETION_UPDATE, new AccountDeletionUpdate(statement));
+
+        //init specific lecture update
+        update_map.put(Sql_Interaction.UPDATE_SPECIFIC_LECTURE, new UpdateSpecificLecture(statement));
     }
 
     public Object SqlQuery(String query, Integer type) throws Exception{

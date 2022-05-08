@@ -23,6 +23,7 @@ public interface NetworkProtocol {
     String ACC_INFO_READY = "READY_TO_CREATE";
 
     String RETRIEVE_TIMETABLE_REQUEST = "TIMETABLE";
+    String EDIT_TIMETABLE_REQUEST = "EDIT_TIMETABLE";
 
     String RETRIEVE_NOTES_REQUEST = "NOTES";
     String CANCEL_NOTES = "CANCEL_NOTES";

@@ -97,6 +97,7 @@ public class ServerStartPanel extends JPanel implements Runnable{
 
     private void serverPanelDestructor(){
         exitServerPanel(true);
+        updateClientTextAreaThread.interrupt();
         BackendGUI_Interface.resetClientInformation();
     }
 }

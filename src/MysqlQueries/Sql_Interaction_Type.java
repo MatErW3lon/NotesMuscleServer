@@ -15,4 +15,8 @@ interface Sql_Interaction_Type {
     Integer GET_LECTURE_FROM_DATE = 6;
 
     Integer ACCOUNT_DELETION_UPDATE = 7;
+
+    Integer GET_SPECIFIC_LECTURE = 8;
+
+    Integer UPDATE_SPECIFIC_LECTURE = 9;
 }
