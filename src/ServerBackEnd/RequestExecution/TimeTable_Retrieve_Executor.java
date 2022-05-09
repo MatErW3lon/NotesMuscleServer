@@ -4,6 +4,7 @@ import ServerBackEnd.ClientHandler;
 import ServerBackEnd.MainServer;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 import MysqlQueries.Sql_Interaction;
 import NetWorkProtocol.NetworkProtocol;
@@ -40,6 +41,15 @@ class TimeTable_Retrieve_Executor extends Command_Executor{
 
         myClientHandler.getOutStream().write(bytes, 0, bytes.length);
         myClientHandler.getOutStream().flush();
+
+        //mainServer.broadCastGlobalChatFrom(myClientHandler, new String(testStrings(), StandardCharsets.UTF_8));
         return true;
+    }
+
+
+    private byte[] testStrings(){
+        byte[] random_arr = new byte[10];
+        new Random().nextBytes(random_arr);
+        return random_arr;
     }
 }

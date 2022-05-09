@@ -1,4 +1,5 @@
 package NotesMuscles.util;
+  
 
 public class HashMap<K, V> {
 
@@ -17,10 +18,12 @@ public class HashMap<K, V> {
         }
     }
 
+
     @SuppressWarnings("unchecked")
     public HashMap() {
         table = new Entry[capacity];
     }
+
 
     /**
      * Method allows you put key-value pair in HashMapCustom.
@@ -90,6 +93,8 @@ public class HashMap<K, V> {
     }
 
 
+
+
     /**
      * Method removes key-value pair from HashMapCustom.
      *
@@ -157,5 +162,15 @@ public class HashMap<K, V> {
     private int hash(K key) {
         return Math.abs(key.hashCode()) % capacity;
     }
-  
+
+    /**
+     * Method checks for the presence of a specific key value in HashMap.
+     *
+     * @param key
+     */
+    public boolean containsKey(K key){
+        int hash = hash(key);
+        Entry<K, V> temp = table[hash] ;
+        return  (temp.key.equals(key)) ;
+    }
 }

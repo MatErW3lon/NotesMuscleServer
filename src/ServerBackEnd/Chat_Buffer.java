@@ -21,6 +21,7 @@ class Chat_Buffer implements Runnable{
     }
 
     public void buffer_message(String message){
+        System.out.println("message: " + message);
         messages_queue.add(message);
     }
 
