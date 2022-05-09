@@ -77,11 +77,34 @@ class Notes_Retrieve_Executor extends Command_Executor{
         myClientHandler.getOutStream().write(txt_data_byte, 0, txt_data_byte.length);
         myClientHandler.getOutStream().flush();
 
-        String chooseEdit = myClientHandler.getInputStream().readUTF();
-        if(chooseEdit.equals(NetworkProtocol.CANCEL_NOTES)){
+        String chooseOption = myClientHandler.getInputStream().readUTF();
+        if(chooseOption.equals(NetworkProtocol.CANCEL_NOTES)){
             return true;
+        }else if(chooseOption.equals(NetworkProtocol.SHARE_NOTES)){
+            //user chose to share the notes
+            //build the data here
+            //get the bilkent id
+            String sendToBilkentID = myClientHandler.getInputStream().readUTF();
+            //keep taking input until cancel or true
+            if(sendToBilkentID.equals("CANCEL")){
+                return true;
+            }
+            String[] forwardData = new String[2];
+            forwardData[0] = sendToBilkentID;
+            forwardData[1] = pathToTxtFile;
+            boolean shared = new Notes_Share_Executor(myClientHandler).executeCommand(forwardData);
+            while(!shared){
+                forwardData[0] = myClientHandler.getInputStream().readUTF();
+                //keep taking input until cancel or true
+                if(forwardData[0].equals("CANCEL")){
+                    return true;
+                }
+                shared = new Notes_Share_Executor(myClientHandler).executeCommand(forwardData);
+            }
+            return shared;
         }
-        //now we wait for the edit.....
+
+        //now we wait for the edit
         String edittedText = myClientHandler.getInputStream().readUTF();
         if(edittedText.equals(NetworkProtocol.CANCEL_NOTES)){
             return true;

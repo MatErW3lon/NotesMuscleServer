@@ -19,4 +19,6 @@ interface Sql_Interaction_Type {
     Integer GET_SPECIFIC_LECTURE = 8;
 
     Integer UPDATE_SPECIFIC_LECTURE = 9;
+
+    Integer IS_A_USER_QUERY = 10;
 }

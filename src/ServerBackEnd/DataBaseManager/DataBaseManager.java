@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import MysqlQueries.Sql_Interaction;
 import ServerBackEnd.DataBaseManager.Query.CheckBilkentIDUniquenessQuery;
 import ServerBackEnd.DataBaseManager.Query.Get_Specific_Lecture;
+import ServerBackEnd.DataBaseManager.Query.Is_A_User_Query;
 import ServerBackEnd.DataBaseManager.Query.LectureFromDateQuery;
 import ServerBackEnd.DataBaseManager.Query.LoginQuery;
 import ServerBackEnd.DataBaseManager.Query.RunSqlQuery;
@@ -57,6 +58,8 @@ public class DataBaseManager {
         //init Lecture Retrieve query
         query_map.put(Sql_Interaction.GET_LECTURE_FROM_DATE, new LectureFromDateQuery(statement));
 
+        //init Is A User Query
+        query_map.put(Sql_Interaction.IS_A_USER_QUERY, new Is_A_User_Query(statement));
     }
 
     private void initUpdateMap(){

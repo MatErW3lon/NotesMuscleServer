@@ -1,4 +1,5 @@
-NotesMuscles.io.InvalidCommandException: THE NETWORK ENCOUNTERED AN INVALID COMMANDhello FROM USER /139.179.197.150
-	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:63)
-	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:85)
-	at ServerBackEnd.ClientHandler.run(ClientHandler.java:56)
+NotesMuscles.io.InvalidFirstCommand: THE FIRST COMMAND WAS NOT LOGIN FROM USER /192.168.156.229
+	at ServerBackEnd.RequestExecution.Login_Executor.executeCommand(Login_Executor.java:34)
+	at ServerBackEnd.RequestExecution.RequestExecution.executeCommand(RequestExecution.java:66)
+	at ServerBackEnd.ClientHandler.executeCommand(ClientHandler.java:91)
+	at ServerBackEnd.ClientHandler.run(ClientHandler.java:61)

@@ -15,7 +15,7 @@ class Create_Account_Executor extends Command_Executor{
     public boolean executeCommand(String[] incomingData) throws Exception{
         MainServer mainServer = MainServer.getInstance();
         String bilkentID =  myClientHandler.getInputStream().readUTF(); // read for bilkentID
-        String sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createBilkentIDUniquessQuery(bilkentID), Sql_Interaction.BILKENTID_UNIQUENESS_QUERY);
+        String sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createBilkentIDPresenceQuery(bilkentID), Sql_Interaction.BILKENTID_UNIQUENESS_QUERY);
         if(sqlResult.equals(NetworkProtocol.ACCOUNT_EXISTS_ERROR)){
             while(sqlResult.equals(NetworkProtocol.ACCOUNT_EXISTS_ERROR)){
                 myClientHandler.getOutStream().writeUTF(NetworkProtocol.ACCOUNT_EXISTS_ERROR);
@@ -24,7 +24,7 @@ class Create_Account_Executor extends Command_Executor{
                 if(bilkentID.equals(NetworkProtocol.CANCEL_ACC_REQUEST)){
                     return false;
                 };
-                sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createBilkentIDUniquessQuery(bilkentID), Sql_Interaction.BILKENTID_UNIQUENESS_QUERY);    
+                sqlResult = (String) mainServer.runSqlQuery(mainServer.getSqlInteration().createBilkentIDPresenceQuery(bilkentID), Sql_Interaction.BILKENTID_UNIQUENESS_QUERY);    
             }
         }
         myClientHandler.getOutStream().writeUTF(NetworkProtocol.ACCOUNT_CONTINUE);

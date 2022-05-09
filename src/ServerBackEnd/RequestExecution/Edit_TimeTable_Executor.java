@@ -70,8 +70,10 @@ class Edit_TimeTable_Executor extends Command_Executor{
         for(String[] dayEntity : dayEntities){
             for(String lectureCol : lectureCols){
                 String lectureAtThtIndex = (String) mainServer.runSqlQuery(sql_Interaction.getRespectiveLectureQuery(dayEntity[0], bilkentID+dayEntity[1], lectureCol),Sql_Interaction.GET_SPECIFIC_LECTURE);
+                System.out.println(lectureAtThtIndex);
                 if(lectureAtThtIndex.equalsIgnoreCase(courseToDrop)){
                     String update_builder = sql_Interaction.createUpdateSpecificLectureQuery(dayEntity[0], bilkentID+dayEntity[1], lectureCol, "NONE");
+                    System.out.println(update_builder);
                     mainServer.runSqlUpdate(update_builder, Sql_Interaction.UPDATE_SPECIFIC_LECTURE); //updates the database
                 }
             }

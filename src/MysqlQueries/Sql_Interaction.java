@@ -13,7 +13,7 @@ public class Sql_Interaction implements Sql_Interaction_Type, Sql_Create_Acc_Upd
         return "select BilkentID from login_info where Username = '" + username + "' and Password = '" + password + "'";
     }
 
-    public String createBilkentIDUniquessQuery(String bilkentID){
+    public String createBilkentIDPresenceQuery(String bilkentID){
         return "select * from login_info where BilkentID = " + bilkentID;
     }
 

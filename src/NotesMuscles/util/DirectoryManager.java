@@ -107,4 +107,14 @@ public class DirectoryManager {
             }
         }
     }
+
+    public String[] getAllLectureDir(String bilkentID){
+        File file = new File(System.getProperty("user.dir") + "//client//" + bilkentID);
+        File[] lectureDirs = file.listFiles();
+        String[] lectures = new String[lectureDirs.length];
+        for(int i = 0; i < lectureDirs.length; i++){
+            lectures[i] = lectureDirs[i].getName();
+        }
+        return lectures;
+    }
 }

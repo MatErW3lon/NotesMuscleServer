@@ -13,6 +13,7 @@ interface Sql_TimeTable_Queries {
         String primary_key = (dayEntity.charAt(0) + "").toUpperCase() + dayEntity.substring(1) + "ID";
         String update_builder = "UPDATE `notesmuscle`.`" + dayEntity + "` " +
         "SET " + lectureNumber + " = '" +  setTo + "' WHERE " + primary_key + " = '" + dayID + "';";
+        
         return update_builder; 
     }
 

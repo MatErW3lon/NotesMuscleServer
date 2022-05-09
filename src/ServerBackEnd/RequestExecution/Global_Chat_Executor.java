@@ -12,7 +12,7 @@ class Global_Chat_Executor extends Command_Executor{
 
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception {
-        System.out.println("HERE IN GLOBAL CHAT");
+        //System.out.println("HERE IN GLOBAL CHAT");
         myClientHandler.flush_global_messages  = ClientHandler.FLUSH_MESSAGES;
        // String username = myClientHandler.getUserName();
 
@@ -26,9 +26,9 @@ class Global_Chat_Executor extends Command_Executor{
             if(message.equals(NetworkProtocol.END_GLOBAL_CHAT)){
                 myClientHandler.getOutStream().writeUTF(NetworkProtocol.END_GLOBAL_CHAT);
             }
-            System.out.println(message);
+            //System.out.println(message);
         }
-        System.out.println("READY FOR ANOTHER COMMAND");
+        //System.out.println("READY FOR ANOTHER COMMAND");
         myClientHandler.flush_global_messages = ClientHandler.BUFFER_MESSAGES;
         return true;
     }

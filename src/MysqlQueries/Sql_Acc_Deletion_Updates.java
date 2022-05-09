@@ -5,12 +5,12 @@ interface Sql_Acc_Deletion_Updates {
     public default String[] createAccDeletionsUpdates(String userID){
         String[] rtnArr = new String[8];
         rtnArr[0] = createDeleteLoginInfoUpdate(userID);
-        rtnArr[1] = createDeleteMondayLecturesUpdate(userID);
+        rtnArr[1] = createDeleteCoursesUpdate(userID);
         rtnArr[2] = createDeleteTuesdayLecturesUpdate(userID);
         rtnArr[3] = createDeleteWednesdayLecturesUpdate(userID);
         rtnArr[4] = createDeleteThursdayLecturesUpdate(userID);
         rtnArr[5] = createDeleteFridayLecturesUpdate(userID);
-        rtnArr[6] = createDeleteCoursesUpdate(userID);
+        rtnArr[6] = createDeleteMondayLecturesUpdate(userID);
         rtnArr[7] = createDeleteUserInfo(userID);
         return rtnArr;
     }
@@ -22,7 +22,7 @@ interface Sql_Acc_Deletion_Updates {
     }
 
     public default String createDeleteMondayLecturesUpdate(String userID){
-        String updateBuilder = "DELETE FROM `notesmuscle`.`monday`" + 
+        String updateBuilder = "DELETE FROM monday" + 
                                " WHERE MondayID = '" +  userID+"M"  + "';";
         return updateBuilder;
     }
@@ -46,8 +46,8 @@ interface Sql_Acc_Deletion_Updates {
     }
 
     public default String createDeleteFridayLecturesUpdate(String userID){
-        String updateBuilder = "DELETE FROM `notesmuscle`.`monday`" + 
-                               " WHERE MondayID = '" +  userID+"F"  + "';";
+        String updateBuilder = "DELETE FROM `notesmuscle`.`friday`" + 
+                               " WHERE FridayID = '" +  userID+"F"  + "';";
         return updateBuilder;
     }
 

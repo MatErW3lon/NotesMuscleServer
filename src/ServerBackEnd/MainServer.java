@@ -68,8 +68,9 @@ public class MainServer extends Thread{
                     //start the server again
                     serverSocket = new ServerSocket(4444);
                 }
+                System.out.println("WATIING FOR CONNECTION");
                 Socket clientSocket = serverSocket.accept(); //wait for a new client a blocking method 
-                //System.out.println("NEW CLIENT CONNECTED");
+                System.out.println("NEW CLIENT CONNECTED");
                 //if the server is closed on the blocked accept() the SocketException will be thrown which is normal
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
                 clientHandler.start();
@@ -201,6 +202,10 @@ public class MainServer extends Thread{
             dataBaseManager = null;
             directoryManager = null;
             sql_Interaction = null;
+    }
+
+    public String[] getAllLectures(String bilkentID) {
+        return directoryManager.getAllLectureDir(bilkentID);
     }
     
 }
