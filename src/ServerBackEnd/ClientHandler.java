@@ -12,6 +12,11 @@ import NotesMuscles.io.*;
 import ServerBackEnd.RequestExecution.RequestExecution;
 import NetWorkProtocol.NetworkProtocol;
 
+
+/*
+    THE SOURCE CONTAINS COMMENTED OUT CODE FOR DEBUGGING
+*/
+
 public class ClientHandler extends Thread {
     
     //these constants are used by the chat buffer thread
@@ -31,14 +36,14 @@ public class ClientHandler extends Thread {
 
     public ClientHandler(Socket clientSocket, MainServer mainServer) throws IOException{
         flush_global_messages = BUFFER_MESSAGES;
-        my_Global_Chat_Buffer = new Chat_Buffer(this);
-
         requestExecution = new RequestExecution(this);
         this.clientSocket = clientSocket;
         this.mainServer = mainServer;
         try{
             dataInputStream = new DataInputStream(this.clientSocket.getInputStream());
             dataOutputStream = new DataOutputStream(this.clientSocket.getOutputStream());
+            //chat buffer init after setting the iostreams
+            my_Global_Chat_Buffer = new Chat_Buffer(this);
         }catch(IOException IOex){
             closeEveryThing();
             IOex.printStackTrace();
@@ -57,6 +62,7 @@ public class ClientHandler extends Thread {
                 String GUIBuilder = user_name + " REQUESTED " + client_command.split(NetworkProtocol.DATA_DELIMITER)[0];
                 BackendGUI_Interface.ClientInformationHandler(GUIBuilder, false);
                 client_command = dataInputStream.readUTF();
+                //System.out.println(client_command);
             } 
             closeEveryThing();
             

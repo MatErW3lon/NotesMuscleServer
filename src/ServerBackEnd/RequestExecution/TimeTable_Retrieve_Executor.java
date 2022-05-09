@@ -18,6 +18,7 @@ class TimeTable_Retrieve_Executor extends Command_Executor{
     public boolean executeCommand(String[] incomingData) throws Exception{
         //here we need to run multiple sql queries and combine them all into a form as shown below
         //lecM1/lecM2/lecM3/lecM4/lecT1/lecT2/lecT3/lecT4/lecW1/lecW2/lecW3/lecW4/lecTH1/lecTH2/lecTH3/lecTH4/LecF1/lecF2/lecF3/lecF4
+        System.out.println("HERE in timetable");
         String bilkentID = incomingData[1];
         String[] resultSetsOfDayEntities = new String[5];
         MainServer mainServer = MainServer.getInstance();

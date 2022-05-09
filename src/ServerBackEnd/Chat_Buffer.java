@@ -27,7 +27,9 @@ class Chat_Buffer implements Runnable{
     @Override
     public void run(){
         while(myClientHandler.flush_global_messages != ClientHandler.END_CHAT_BUFFER_THREAD){
+            //System.out.println("runnning the buffer");
             if(myClientHandler.flush_global_messages == ClientHandler.FLUSH_MESSAGES){
+                System.out.println("requested flush");
                 try{
                     for(int i = 0; i < messages_queue.size(); i++){
                         String message = messages_queue.remove() + "\n";
