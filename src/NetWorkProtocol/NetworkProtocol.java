@@ -12,6 +12,9 @@ public interface NetworkProtocol {
 
     String SUCCESSFULL_LOGIN = "SUCCESS";
 
+    String GET_LECTURE_POSSIBILITY = "LECTURE_POSSIBILITY";
+    String LECTURE_NOT_POSSIBLE = "NO";
+    String LECTURE_POSSIBLE = "YES";
     String IMAGE_SEND = "IMAGE";
     String IMAGE_STOP = "STOP_IMAGE";
     Integer IMAGE_RECEIVED_CONFIRMATION = 1;

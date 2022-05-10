@@ -55,6 +55,9 @@ public class RequestExecution {
 
         //init Global Chat Executor
         command_executors.put(NetworkProtocol.PULL_GLOBAL_CHAT, new Global_Chat_Executor(myClientHandler));
+
+        //init Lecture Possibility Executor
+        command_executors.put(NetworkProtocol.GET_LECTURE_POSSIBILITY, new Lecture_Possibility_Executor(myClientHandler));
     }
 
     public boolean executeCommand(String incomingData) throws Exception{
