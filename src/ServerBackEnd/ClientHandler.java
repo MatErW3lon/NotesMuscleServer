@@ -39,6 +39,7 @@ public class ClientHandler extends Thread {
         requestExecution = new RequestExecution(this);
         this.clientSocket = clientSocket;
         this.mainServer = mainServer;
+        this.myNotes_Builder = new Notes_Builder(this);
         try{
             dataInputStream = new DataInputStream(this.clientSocket.getInputStream());
             dataOutputStream = new DataOutputStream(this.clientSocket.getOutputStream());

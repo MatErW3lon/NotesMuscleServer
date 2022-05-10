@@ -13,6 +13,7 @@ class ImageStop_Executor extends Command_Executor{
         //here we can choose to perform image to text on the set of images
         //or choose not to in future implementations of the server
         System.out.println("HERE IN IMAGE STOP");
+        myClientHandler.getNotesBuilder().createdNotesFile = false;
         return true;
     }
 

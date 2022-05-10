@@ -31,7 +31,7 @@ class Image_Executor extends Command_Executor{
 
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception{
-        System.out.println("HERE IN IMAGE SEND");
+        //System.out.println("HERE IN IMAGE SEND");
         String dateOfReceive = incomingData[2];
         Notes_Builder notes_Builder = myClientHandler.getNotesBuilder();
         notes_Builder.setDate(dateOfReceive);
@@ -67,8 +67,8 @@ class Image_Executor extends Command_Executor{
 
                     //now we wait for the response and build the notes data
                     notes_data = ocr_inputStream.readUTF();
-                    notes_Builder.appendToFile(notes_data);
                     System.out.println("NOTES DATA: " + notes_data);
+                    notes_Builder.appendToFile(notes_data);
                 }catch (IOException e) {
                     closeOcrConnection();
                     e.printStackTrace(System.err);

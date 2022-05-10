@@ -47,13 +47,11 @@ class Lecture_Possibility_Executor extends Command_Executor{
 
     @Override
     public boolean executeCommand(String[] incomingData) throws Exception {
-        System.out.println("HERE IN TIMETABLE POSSIBILITY");
+        //System.out.println("HERE IN TIMETABLE POSSIBILITY");
         MainServer mainServer = MainServer.getInstance();
         Sql_Interaction sql_Interaction = mainServer.getSqlInteration();
         String[] dateSplit = incomingData[1].split(" ");
-        for(String dateData : dateSplit){
-            System.out.println(dateData);
-        }
+       
 
         //get the column names for the database
         String dayCol = day_DayID_map.get(dateSplit[0])[0];
@@ -65,7 +63,7 @@ class Lecture_Possibility_Executor extends Command_Executor{
 
         String coursesID = myClientHandler.getUserInfo().split(NetworkProtocol.DATA_DELIMITER)[0]; 
         String lecture = (String)mainServer.runSqlQuery(sql_Interaction.createGetCurrentLectureQuery(coursesID, dayCol, dayEntity,lectureCol), Sql_Interaction.GET_LECTURE_FROM_DATE); 
-        System.out.println(lecture);
+ 
 
         if(lecture.equals("NONE")){
             myClientHandler.getOutStream().writeUTF(NetworkProtocol.LECTURE_NOT_POSSIBLE);

@@ -1,7 +1,10 @@
 package ServerBackEnd;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,8 +59,19 @@ public class Notes_Builder {
 
     public void appendToFile(String notes_data) throws IOException{
         this.notes_data = notes_data;
+        System.out.println("HERE IN APPEND");
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file_path+ ".txt"));
+        StringBuilder buildNotesData = new StringBuilder();
+        String line = bufferedReader.readLine();
+        while (line != null) {
+            buildNotesData.append(line);
+            buildNotesData.append(System.lineSeparator());
+            line = bufferedReader.readLine();
+        }
+        String everything = buildNotesData.toString();
+        bufferedReader.close();
         FileWriter fileWriter = new FileWriter(file_path + ".txt");
-        fileWriter.append(this.notes_data);
+        fileWriter.write(everything+ this.notes_data);
         fileWriter.close();
     }
 
